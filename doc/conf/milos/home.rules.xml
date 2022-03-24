@@ -1,0 +1,63 @@
+<!-- Pravidla - akce provadene pri nastale udalosti -->
+<rules>
+
+	   <system>
+	      <rule name="When system start" event="on_start">
+		 <action  type="send_command" item="Light1" param="ON"/>
+	      </rule>
+
+	      <rule name="When system stop" event="on_stop">
+		 <action  type="send_command" item="Light1" param="OFF"/>
+	      </rule>
+	   </system>
+
+
+
+		<!-- Nastavování scén -->
+		<!-- TOGGLE invertuje, ON, OFF -->
+		<ZadveriVenModry>
+			<rule event="on_click">
+				<action type="send_command" item="ZadveriZakladni" param="TOGGLE"/>
+			</rule>
+			<rule event="on_doubleclick">
+				<action type="send_command" item="Prichod" param="ON"/>
+			</rule>
+			<rule event="on_longclick">
+				<action type="send_command" item="Odchod" param="ON"/>
+			</rule>
+		</ZadveriVenModry>
+		
+		<PredsinUDveriZeleny>
+		<!-- ONDELAYOFF zapne a spustí časovač, po uplynutí vypne, DIMM stmívá mezi nulou a scénou a zpět -->
+			<rule event="on_doubleclick">
+				<action type="send_command" item="PredsinZakladni" param="TOGGLE"/>
+			</rule>
+			<rule event="on_click">
+				<action type="send_command" item="PredsinZakladni" param="ONDELAYOFF:30000"/>
+			</rule>
+			<rule event="on_hold">
+				<action type="send_command" item="PredsinZakladni" param="DIMM"/>
+			</rule>
+		</PredsinUDveriZeleny>
+		
+		<ObyvakUDveriCerveny>
+		<!-- PREVIOUS, NEXT - posouvá se na předchozí, následující scénu z banky -->
+			<rule event="on_click">
+				<action condition="$ObyvakuDveriModry == OFF" type="send_command" item="ObyvakZakladni" param="TOGGLE"/>
+				<action condition="$ObyvakuDveriModry == ON" type="send_command" item="SceneBankObyvakKuchyn" param="PREVIOUS"/>
+			</rule>
+			<rule event="on_doubleclick">
+				<action type="send_command" item="ObyvakaKuchynZakladni" param="TOGGLE"/>
+			</rule>
+			<rule event="on_hold">
+				<action type="send_command" item="ObyvakZakladni" param="DIMM"/>
+			</rule>
+		</ObyvakUDveriCerveny>
+		
+		<ObyvakUDveriModry>
+			<rule event="on_click">
+				<action condition="$ObyvakuDveriCerveny == ON" type="send_command" item="SceneBankObyvakKuchyn" param="NEXT"/>
+			</rule>
+		</ObyvakUDveriModry>
+   
+ </rules>

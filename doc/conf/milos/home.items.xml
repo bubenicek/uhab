@@ -1,0 +1,281 @@
+<!-- Definice vsech polozek existujicich v domacim systemu -->
+<items>
+
+   <!-- Definice skupin -->
+   <group name="Buttons" label="All input buttons"/>
+   <group name="Lights" label="All lights"/>
+   <group name="Switchers"/>   
+   
+   <!-- Místnosti -->
+   <group name="Zadveri" type="room"/>
+   <group name="Predsin" type="room"/>
+   <group name="Techmistnost" type="room"/>
+   <group name="Sklep" type="room"/>
+   <group name="KoupelnaSpodni" type="room"/>
+   <group name="Pokoj" type="room"/>
+   <group name="Obyvak" type="room" label="Obyvaci pokoj"/>
+   <group name="Kuchyn" type="room"/>
+   <group name="Terasa" type="room" label="Terasa"/>
+     
+   <group name="Schodiste" type="room"/>
+   <group name="PokojVychod" type="room"/>
+   <group name="PokojJih" type="room"/>
+   <group name="PokojZapad" type="room"/>
+   <group name="KoupelnaHorni" type="room"/>
+   <group name="Komora"/>
+   
+   <!-- Switchers -->
+   <!-- Tlacitkove spinace svetel  -->
+   <group name="ZadveriVen" type="switcher" label="ven"/>
+   <group name="PredsinUDveri" type="switcher" label="u dveří"/>
+   <group name="TechmistnostUDveri" type="switcher" label="u dveří"/>
+   <group name="KoupelnaSpodniUdveri" type="switcher" label="u dveří"/>
+   <group name="SklepUDveri" type="switcher" label="u dveří"/>
+   <group name="PokojVsechny" type="switcher" label="všechny"/>
+   <group name="ObyvakUDveri" type="switcher" label="u dveří"/>
+   <group name="ObyvakNaTerasu" type="switcher" label="na terasu"/>
+   <group name="KuchynUokna" type="switcher" label="u okna"/>
+   <group name="KuchynLinka" type="switcher" label="linka"/>
+				
+   <group name="SchodisteVsechny" type="switcher" label="všechny"/>
+   <group name="KoupelnaHorniUDveri" type="switcher" label="u dveří"/>
+   <group name="KomoraUDveri" type="switcher" label="u dveří"/>
+   <group name="PokojVychodVsechny" type="switcher" label="všechny"/>
+   <group name="PokojJihVlevo" type="switcher" label="vlevo"/>
+   <group name="PokojJihVpravo" type="switcher" label="vpravo"/>
+   <group name="PokojZapadVsechny" type="switcher" label="všechny"/>
+   
+
+   
+   <!-- Periodicky timer kazdou 1 sec -->
+   <timer name="TimerSec" binding="system=timer:type=periodic,interval=1000"/>
+
+   <!-- Periodicky timer vyvolany kazdy den v dany cas -->
+   <timer name="TimerDay" binding="system=timer:type=periodic,mask='xx/xx/xxxx 00:00:00'"/>
+
+   <!-- Periodicky timer vyvolany kazdy prvni den v mesici -->
+   <timer name="TimerMonthDay" binding="system=timer:type=periodic,mask='01/xx/xxxx 00:00:00'"/>
+
+
+   <!-- Odesilani emailu -->
+   <string name="Email" binding="system=email:smpt_server=smtp.seznam.cz,username=bubenik,password=kokosak"/>
+
+
+	<!-- Stmivaci jednokanálová světla -->
+	<!-- Přízemí -->
+	<!-- Obývák -->
+	<dimmer name="ObyvakHlavni" label="hlavní" group="Lights,Obyvak" binding="dmx=channel:1, ON=0:255, OFF=0:0"/>
+	<dimmer name="ObyvakStropPanel" label="stropní panel" group="Lights,Obyvak" binding="dmx=channel:2, ON=0:255, OFF=0:0"/>
+	<dimmer name="ObyvakCteci" label="čtecí" group="Lights,Obyvak" binding="dmx=channel:3, ON=0:255, OFF=0:0"/>
+	<dimmer name="ObyvakNabytek" label="nábytek" group="Lights,Obyvak" binding="dmx=channel:4, ON=0:255, OFF=0:0"/>
+	<dimmer name="ObyvakKrb" label="krb" group="Lights,Obyvak" binding="dmx=channel:5, ON=0:255, OFF=0:0"/>
+	<!-- Kuchyň -->
+	<dimmer name="KuchynHlavni" label="hlavní" group="Lights, Kuchyn" binding="dmx=channel:6, ON=0:255, OFF=0:0"/>
+	<dimmer name="KuchynStropPanel" label="stropní panel" group="Lights, Kuchyn" binding="dmx=channel:7, ON=0:255, OFF=0:0"/>
+	<dimmer name="KuchynLinka" label="linka" group="Lights" binding="dmx=channel:8, ON=0:255, OFF=0:0"/>
+	<!-- Terasa -->
+	<dimmer name="TerasaKuchyn" label="východ kuchyň" group="Lights,Terasa" binding="dmx=channel:9, ON=0:255, OFF=0:0"/>
+	<dimmer name="TerasaSezeni" label="sezení" group="Lights,Terasa" binding="dmx=channel:10, ON=0:255, OFF=0:0"/>
+	<!-- Pokoj -->
+	<dimmer name="PokojHlavni" label="hlavní" group="Lights,Pokoj" binding="dmx=channel:11, ON=0:255, OFF=0:0"/>
+	<dimmer name="PokojStropPanel" label="stropní panel" group="Lights,Pokoj" binding="dmx=channel:12, ON=0:255, OFF=0:0"/>
+	<!-- Koupelna spodní -->
+	<dimmer name="KoupelnaSpodniHlavni" label="hlavní" group="Lights,KoupelnaSpodni" binding="dmx=channel:13, ON=0:255, OFF=0:0"/>
+	<!-- Předsíň -->
+	<dimmer name="PredsinHlavni" label="hlavní" group="Lights,Predsin" binding="dmx=channel:14, ON=0:255, OFF=0:0"/>
+	<dimmer name="PredsinOrientacni" label="orientační" group="Lights,Predsin" binding="dmx=channel:15, ON=0:255, OFF=0:0"/>
+	<!-- Sklep -->
+	<dimmer name="SklepHlavni" label="hlavní" group="Lights,Sklep" binding="dmx=channel:16, ON=0:255, OFF=0:0"/>
+	<!-- Zádveří -->
+	<dimmer name="ZadveriHlavni" label="hlavní" group="Lights,Zadveri" binding="dmx=channel:17, ON=0:255, OFF=0:0"/>
+	<!-- Technická místnost -->
+	<dimmer name="TechMistnostHlavni" label="hlavní" roup="Lights,Techmistnost" binding="dmx=channel:18, ON=0:255, OFF=0:0"/>
+	<!-- Podkroví -->
+	<!-- Schodiště -->
+	<dimmer name="SchodisteHlavni" label="Podkroví" group="Lights, Schodiste" binding="dmx=channel:26, ON=0:255, OFF=0:0"/>
+	<!-- Pokoj Východ -->
+	<dimmer name="PokojVychodHlavni" label="Hlavní" group="Lights,PokojVychod" binding="dmx=channel:19, ON=0:255, OFF=0:0"/>
+	<dimmer name="PokojVychodNadStolem" label="nad stolem" group="Lights,PokojVychod" binding="dmx=channel:20, ON=0:255, OFF=0:0"/>
+	<!-- Pokoj Jih -->
+	<dimmer name="PokojJihNadStolem" label="nad stolem vlevo" group="Lights,PokojJih" binding="dmx=channel:21, ON=0:255, OFF=0:0"/>
+	<dimmer name="PokojJihHlavniVlevo" label="hlavní vlevo" group="Lights,PokojJih" binding="dmx=channel:22, ON=0:255, OFF=0:0"/>
+	<dimmer name="PokojJihHlavniVpravo" label="hlavní vpravo" group="Lights,PokojJih" binding="dmx=channel:23, ON=0:255, OFF=0:0"/>
+	<dimmer name="PokojJihNadStolemVpravo" label="nad stolem vpravo" group="Lights,PokojJih" binding="dmx=channel:24, ON=0:255, OFF=0:0"/>
+	<!-- Pokoj Západ -->
+	<dimmer name="PokojZapadObrazy" label="obrazy" group="Lights,PokojZapad" binding="dmx=channel:25, ON=0:255, OFF=0:0"/>
+	<dimmer name="PokojZapadHlavni" label="hlavní" group="Lights,PokojZapad" binding="dmx=channel:27, ON=0:255, OFF=0:0"/>
+	<dimmer name="PokojZapadNabytek" label="nábytek" group="Lights,PokojZapad" binding="dmx=channel:31, ON=0:255, OFF=0:0"/>
+	<!-- Koupelna -->
+	<dimmer name="KoupelnaHorniZrcadlo" label="zrcadlo" group="Lights,KoupelnaHorni" binding="dmx=channel:28, ON=0:255, OFF=0:0"/>
+	<dimmer name="KoupelnaHorniHlavni" label="hlavní" group="Lights,KoupelnaHorni" binding="dmx=channel:29, ON=0:255, OFF=0:0"/>
+	<!-- Komora -->
+	<dimmer name="KomoraHlavni" label="hlavní" group="Lights,Komora" binding="dmx=channel:30, ON=0:255, OFF=0:0"/>
+	
+	   
+    <!-- Stmivaci RGB svetla -->
+	<!-- jen pro ilustraci. Takový žádný nemám -->
+	<dimmer name="DimmerRGB" label="test" group="Lights,test" binding="dmx=channel:4,5,6 ON=0:255,255,255 OFF=0:255,255,255"/>
+
+
+
+   <!-- Tlacitka svetel -->
+	<contact name="ZadveriVenModry" label="modrý" group="Buttons, Zadveri, ZadveriVen" binding="vehabus1:17"/>
+	<contact name="PredsinUDveriZeleny" label="Zelený" group="Buttons, Predsin, PredsinUDveri" binding="vehabus1:18"/>
+	<contact name="KoupelnaSpodniUDveriCerveny" label="červený" group="Buttons, KoupelnaSpodni, KoupelnaSpodniUdveri" binding="vehabus1:16"/>
+	<contact name="PokojVsechnyCerveny" label="červený" group="Buttons, Pokoj, PokojVsechny" binding="vehabus1:14"/>
+	<contact name="PokojVsechnyZeleny" label="zelený" group="Buttons, Pokoj, PokojVsechny" binding="vehabus1:15"/>
+	<contact name="SklepUDveriCerveny" label="červený" group="Buttons, Sklep, SklepUDveri" binding="vehabus1:13"/>
+	<contact name="TechmistnostUDveriCerveny" label="červený" group="Buttons, Techmistnost, TechmistnostUDveri" binding="vehabus1:19"/>
+	<contact name="ObyvakUDveriCerveny" label="červený" group="Buttons, Obyvak, ObyvakUDveri" binding="vehabus1:9"/>
+	<contact name="ObyvakUDveriZeleny" label="zelený" group="Buttons, Obyvak, ObyvakUDveri" binding="vehabus1:10"/>
+	<contact name="ObyvakUDveriModry" label="modrý" group="Buttons, Obyvak, ObyvakUDveri" binding="vehabus1:11"/>
+	<contact name="ObyvakUDveriHnedy" label="hnědý" group="Buttons, Obyvak, ObyvakUDveri" binding="vehabus1:12"/>
+	<contact name="ObyvakNaTerasuModry" label="modrý" group="Buttons, Obyvak, ObyvakNaTerasu" binding="vehabus1:4"/>
+	<contact name="ObyvakNaTerasuHnedy" label="hnědý" group="Buttons, Obyvak, ObyvakNaTerasu" binding="vehabus1:5"/>
+	<contact name="KuchynUoknaCerveny" label="červený" group="Buttons, Kuchyn, KuchynUokna" binding="vehabus1:6"/>
+	<contact name="KuchynUoknaZeleny" label="zelený" group="Buttons, Kuchyn, KuchynUokna" binding="vehabus1:7"/>
+	<contact name="KuchynLinkaCerveny" label="červený" group="Buttons, Kuchyn, KuchynLinka" binding="vehabus1:8"/>
+					
+	<contact name="SchodisteVsechnyCerveny" label="červený" group="Buttons, Schodiste, SchodisteVsechny" binding="vehabus1:21"/>
+	<contact name="KoupelnaHorniUDveriCerveny" label="červený" group="Buttons, KoupelnaHorni, KoupelnaHorniUDveri" binding="vehabus1:23"/>
+	<contact name="KoupelnaHorniUDveriZeleny" label="zelený" group="Buttons, KoupelnaHorni, KoupelnaHorniUDveri" binding="vehabus1:24"/>
+	<contact name="KomoraUDveriModry" label="modrý" group="Buttons, Komora, KomoraUDveri" binding="vehabus1:22"/>
+	<contact name="PokojVychodVsechnyCerveny" label="červený" group="Buttons, PokojVychod, PokojVychodVsechny" binding="vehabus1:31"/>
+	<contact name="PokojVychodVsechnyZeleny" label="zelený" group="Buttons, PokojVychod, PokojVychodVsechny" binding="vehabus1:32"/>
+	<contact name="PokojJihVlevoModry" label="modrý" group="Buttons, PokojJih, PokojJihVlevo" binding="vehabus1:27"/>
+	<contact name="PokojJihVlevoHnedy" label="hnědý" group="Buttons, PokojJih, PokojJihVlevo" binding="vehabus1:28"/>
+	<contact name="PokojJihVpravoCerveny" label="červený" group="Buttons, PokojJih, PokojJihVpravo" binding="vehabus1:29"/>
+	<contact name="PokojJihVpravoZeleny" label="zelený" group="Buttons, PokojJih, PokojJihVpravo" binding="vehabus1:30"/>
+	<contact name="PokojZapadVsechnyModry" label="modrý" group="Buttons, PokojZapad, PokojZapadVsechny" binding="vehabus1:25"/>
+	<contact name="PokojZapadVsechnyHnedy" label="hnědý" group="Buttons, PokojZapad, PokojZapadVsechny" binding="vehabus1:26"/>
+	<!-- Neobsazeno 1,2,3,20 -->
+
+   <!-- Svetelne sceny -->
+   
+   <!-- Odchod - vše zhasne, zádveří na 50% -->   
+	<scene name="Odchod" label="Odchod">
+		<item name="ObyvakHlavni" state="OFF=1000:0"/>
+		<item name="ObyvakStropPanel" state="OFF=1000:0"/>
+		<item name="ObyvakCteci" state="OFF=1000:0"/>
+		<item name="ObyvakNabytek" state="OFF=1000:0"/>
+		<item name="ObyvakKrb" state="OFF=1000:0"/>
+		<item name="KuchynHlavni"  state="OFF=1000:0"/>
+		<item name="KuchynStropPanel"  state="OFF=1000:0"/>
+		<item name="KuchynLinka"  state="OFF=1000:0"/>
+		<item name="TerasaKuchyn"  state="OFF=1000:0"/>
+		<item name="TerasaSezeni"  state="OFF=1000:0"/>
+		<item name="PokojHlavni"  state="OFF=1000:0"/>
+		<item name="PokojStropPanel"  state="OFF=1000:0"/>
+		<item name="KoupelnaSpodniHlavni"  state="OFF=1000:0"/>
+		<item name="PredsinHlavni"  state="OFF=1000:0"/>
+		<item name="PredsinOrientacni"  state="OFF=1000:0"/>
+		<item name="SklepHlavni"  state="OFF=1000:0"/>
+		<item name="ZadveriHlavni"  state="ON=1000:128"/>
+		<item name="TechMistnostHlavni"  state="OFF=1000:0"/>
+		<item name="SchodisteHlavni"  state="OFF=1000:0"/>
+		<item name="PokojVychodHlavni"  state="OFF=1000:0"/>
+		<item name="iPokojVychodNadStolem"  state="OFF=1000:0"/>
+		<item name="PokojJihNadStolem"  state="OFF=1000:0"/>
+		<item name="PokojJihHlavniVlevo"  state="OFF=1000:0"/>
+		<item name="PokojJihHlavniVpravo"  state="OFF=1000:0"/>
+		<item name="PokojJihNadStolemVpravo"  state="OFF=1000:0"/>
+		<item name="PokojZapadObrazy"  state="OFF=1000:0"/>
+		<item name="PokojZapadHlavni"  state="OFF=1000:0"/>
+		<item name="PokojZapadNabytek"  state="OFF=1000:0"/>
+		<item name="KoupelnaHorniZrcadlo"  state="OFF=1000:0"/>
+		<item name="KoupelnaHorniHlavni"  state="OFF=1000:0"/>
+		<item name="KomoraHlavni"  state="OFF=1000:0"/>
+	</scene>
+   
+   <!-- Příchod zvenčí -->   
+	<scene name="Prichod" label="Příchod">
+		<item name="ZadveriHlavni"  state="ON=1000:255"/>
+		<item name="PredsinOrientacni"  state="ON=1000:64"/>
+		<item name="PredsinHlavni"  state="ON=2000:255"/>
+		<item name="KuchynHlavni"  state="ON=3000:255"/>
+		<item name="KuchynStropPanel"  state="ON=3000:64"/>
+	</scene>
+   
+   <!-- Základní zádveří -->   
+	<scene name="ZadveriZakladni" label="Zádveří základní">
+		<item name="ZadveriHlavni"  state="ON=1000:255"/>
+		<item name="PredsinOrientacni"  state="ON=1000:64"/>
+	</scene>
+	
+	<!-- Základní předsíň -->   
+	<scene name="PredsinZakladni" label="Předsíň základní">
+		<item name="PredsinHlavni"  state="ON=1000:255"/>
+		<item name="PredsinOrientacni"  state="ON=1000:64"/>
+	</scene>
+   
+   <!-- Základní kuchyň a obývák -->
+	<scene name="ObyvakaKuchynZakladni" label="Obývák a kuchyň základní">
+		<item name="ObyvakHlavni" state="ON=1000:255"/>
+		<item name="ObyvakStropPanel" state="ON=2000:64"/>
+		<item name="ObyvakKrb"  state="OFF=2000:0"/>
+		<item name="ObyvakCteci"  state="OFF=1000:0"/>
+		<item name="ObyvakNabytek"  state="OFF=1000:0"/>
+		<item name="KuchynHlavni"  state="ON=1000:255"/>
+		<item name="KuchynStropPanel"  state="ON=2000:64"/>
+		<item name="KuchynLinka"  state="OFF=2000:0"/>
+	</scene>
+   
+   <!-- Kuchyň a obývák pro TV -->
+	<scene name="ObyvakaKuchynTV" label="Obývák a kuchyň pro sledování TV">
+		<item name="ObyvakHlavni" state="OFF=1000:0"/>
+		<item name="ObyvakStropPanel" state="ON=2000:32"/>
+		<item name="ObyvakKrb"  state="ON=2000:32"/>
+		<item name="ObyvakCteci"  state="OFF=1000:0"/>
+		<item name="ObyvakNabytek"  state="ON=2000:32"/>
+		<item name="KuchynHlavni"  state="ON=1000:64"/>
+		<item name="KuchynStropPanel"  state="ON=2000:32"/>
+		<item name="KuchynLinka"  state="ON=2000:32"/>
+	</scene>
+   
+   <!-- Kuchyň a obývák pro krb -->
+	<scene name="ObyvakaKuchynKrb" label="Obývák a kuchyň - krb">
+		<item name="ObyvakHlavni" state="OFF=1000:0"/>
+		<item name="ObyvakStropPanel" state="ON=2000:64"/>
+		<item name="ObyvakKrb"  state="ON=2000:64"/>
+		<item name="ObyvakCteci"  state="OFF=1000:0"/>
+		<item name="ObyvakNabytek"  state="ON=2000:64"/>
+		<item name="KuchynHlavni"  state="OFF=1000:0"/>
+		<item name="KuchynStropPanel"  state="ON=2000:64"/>
+		<item name="KuchynLinka"  state="ON=2000:32"/>
+	</scene>
+   
+   <!-- Kuchyň a obývák pro čtení -->
+	<scene name="ObyvakaKuchynCteni" label="Obývák a kuchyň - čtení">
+		<item name="ObyvakHlavni" state="OFF=1000:0"/>
+		<item name="ObyvakStropPanel" state="ON=2000:64"/>
+		<item name="ObyvakKrb"  state="ON=2000:32"/>
+		<item name="ObyvakCteci"  state="ON=1000:255"/>
+		<item name="ObyvakNabytek"  state="ON=2000:32"/>
+		<item name="KuchynHlavni"  state="OFF=1000:0"/>
+		<item name="KuchynStropPanel"  state="ON=2000:64"/>
+		<item name="KuchynLinka"  state="ON=2000:32"/>
+	</scene>
+
+	<!-- Základní obývák -->
+	<scene name="ObyvakZakladni" label="Obývák základní">
+		<item name="ObyvakHlavni" state="ON=1000:255"/>
+		<item name="ObyvakStropPanel" state="ON=2000:64"/>
+	</scene>
+   
+	<!-- Základní kuchyň -->
+	<scene name="KuchynZakladni" label="Kuchyň základní">
+		<item name="KuchynHlavni"  state="ON=1000:255"/>
+		<item name="KuchynStropPanel"  state="ON=2000:64"/>
+   </scene>
+   
+   <!-- Základní kuchyňská linka -->
+	<scene name="KuchynLinka" label="Kuchyň linka">
+		<item name="KuchynLinka"  state="ON=1000:255"/>
+	</scene>
+
+
+   <!-- Banky svetelnych scen -->
+   <scene_bank name="SceneBankObyvakKuchyn" scene="ObyvakaKuchynZakladni,ObyvakaKuchynTV,ObyvakaKuchynKrb,ObyvakaKuchynCteni"/>
+   
+</items>
+

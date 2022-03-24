@@ -1,0 +1,11 @@
+Popis parametru binding rozhrani
+=================================
+
+DMX:
+----
+dmx.poll    = Cas v ms refresh DMX output bufferu (min 20ms)
+dmx.fadetick = Cas v ms jednoho kroku faderu (minimal 20ms)
+dmx.periodical_fadetime = Cas v ms pro jednu periodu faderu v cycklickem rezimu  (napr. 5000ms)
+dmx.break_delay = Delka DMX breaku v cyklech (20000 = 200usec, 100000 = 1ms)
+
+

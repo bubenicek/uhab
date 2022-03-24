@@ -1,0 +1,154 @@
+================================================================================================
+
+                                       Items syntax
+
+================================================================================================
+
+<items>
+
+   <item_type name="ItemName" label="Itemlabel" tag="optional" group="grp1,grp2,grp3" state="ON|OFF|number|string" binding="binding_configuration_string"/>
+
+</items>
+
+Popis attributu:
+----------------
+   name  = Unikatni nazev item
+   label = Default popis ktery se zobrazuje v sitemap
+   tag = Retezcova znacka pro rozsirujici oznaceni
+   group = Skupiny do ktery je item zarazena. Seznam skupi je oddeleny carkou
+   state = Vychozi stav item, pokud se jedna o itemu, ktera neni navazana na zadny binding iterface (ON|OFF|number|string)
+   binding = Konfiguracni retezec podle typu binding interface
+
+Typy items:
+------------ 
+
+<group> - Skupina items
+------------------------
+ Slouzi k seskupovani items
+
+syntax:
+  <group name="" label="" stereotype="list|none"/>
+
+example:
+  <group name="Contacts" label="Vypinace"/>                             // Definice skupiny kontaktu
+  <group name="SceneBank1" label="Scene bank1" stereotype="list"/>      // Definice skupiny typu seznam ktery reaguje na prikazy UP,DOWN a vybira item z seznamu jako aktivni (posila ji povel ON pri vyberu)
+
+
+<contact> - Binarni vstup
+------------------------------------
+  - Slouzi k definici binarniho vstupu, napr. tlacitka|vypinace. 
+  - Hodnota stavu muze byt ON|OFF
+  - Nepodporuje zadne prikazy pro send_command
+
+syntax:
+   <contact name="" label="" group="" binding=""/>
+  
+example:
+   <contact name="VContact1" label="VContact1" group="Contacts" binding="vehabus=input:0"/>
+
+
+<switch> - Binarni vystup
+------------------------------------
+  - Slouzi k definici binarniho vystupu, napr. rele, svetlo
+  - Hodnota stavu muze byt ON|OFF
+  - podporuje prikazy pro send_command ON,OFF,TOGGLE
+
+syntax:
+   <switch name="" label="" group="" binding=""/>
+
+example:
+   <switch name="VRelay1" label="VRelay1" group="Relays" binding="vehabus=relay:0"/>
+
+
+<number> - Hodnota typu cislo
+------------------------------------
+  - Slouzi k definici hodnoty typu cislo
+  - Hodnota reprezentuje cislo s desetinym mistem
+  - Podporuje pouze nastaveni hodnoty typu number
+  
+syntax:
+   <number name="" label="" group="" state="" binding=""/>
+
+example:
+   <number name="VTemp1" label="Temp1 [%.1f °C]" group="Temperature" binding="vehabus=onewire:0"/>   // Cislo mapovane na teplotni cidlo
+   <number name="Value" label="Value" state="1000"/>                                                 // Cislo s vychozi hodnotou 1000
+
+
+<string> - Hodnota typu retezec
+------------------------------------
+  - Slouzi k definici hodnoty typu retezec
+  - Hodnota reprezentuje cislo s desetinym mistem
+  - POdporuje pouze nastaveni hodnoty typu number
+
+syntax:
+   <string name="" label="" group="" state="" binding=""/>
+
+example:
+   <string name="PVDateTime" label="Date [%s]" group="PV" binding="snmp=snmp1:iso.3.6.1.4.1.21111.1.2.12.1.0"/>   // Retezec mapovany na snmp interface
+
+
+<dimmer> - Stmivaci svetlo
+------------------------------------
+  - Definice stmivaciho svetla
+  
+syntax:
+   <dimmer name="" label="" group="" binding=""/>
+
+example:
+   <dimmer name="Dim1" label="Dim1" binding="dmx=dmx2:1 ON=255 OFF=0"/>  // Defunije dimmer mapovany na dmx2 sbernici, DMX kanal cislo 1, hondota ON=255, OFF=0
+
+
+<timer>  - Casovac
+------------------------------
+  - Definice casovace
+  
+syntax:
+   <timer name="" binding="system=timer:periodic,* * * * *"/>         
+
+   Format casu timeru: sec min hour dom mon dow
+         day = den v mesici (1-31)
+         mon = mesic (1 - 12)
+         hour = hodina (0-23)
+         min = minuta (0 - 59)
+         sec = sekunda (0 - 59)
+   
+example:
+   <timer name="TimerSec" binding="system=timer:periodic,* * * * 1"/>         // Periodicky timer kazdou 1 sec
+   <timer name="TimerMin" binding="system=timer:periodic,* * * 1 *"/>         // Periodicky timer kazdou 1 min
+   <timer name="TimerHour" binding="system=timer:periodic,* * 1 * *"/>        // Periodicky timer kazdou 1 hod
+   <timer name="TimerDay" binding="system=timer:periodic,* * 11 00 00"/>      // Periodicky timer vyvolany kazdy den v 11:00:00
+   <timer name="TimerMonthDay" binding="system=timer:periodic,1 * 0 0 0"/>    // Periodicky timer vyvolany kazdy prvni den v mesici v 00:00:00 -->
+
+
+<scene>  - Scena
+------------------------------------
+  - Definice sceny
+  
+syntax:
+  <scene name="" group="" label=""/>
+
+example:
+  <group name="SceneBank1" label="Senebank1" stereotype="list"/>
+  <scene name="SCN_Odchod" group="SceneBank1"/>
+
+
+<color>  - RGB stmivaci svetlo
+------------------------------------
+  - Definice RGB stmivaciho svetla
+  
+syntax:
+   <color name="" label="" group="" binding=""/>
+
+example:
+   <color name="Color1" label="Color1" binding="dmx=dmx2:1,2,3 ON=255,255,255 OFF=0,0,0"/>  // Defnuje dimmer mapovany na dmx2 sbernici, DMX kanal cislo 1 2 3, hondota ON=255,255,255 OFF=0,0,0
+ 
+
+<rollershutter> - Ovladac rolety
+------------------------------------
+  - Definice typu roleta
+  
+syntax:
+   <rollershutter name="" label="" group="" binding=""/>
+
+example:
+   <rollershutter name="Rol1" label="Rol1" binding="modbus=slave2:0"/>  

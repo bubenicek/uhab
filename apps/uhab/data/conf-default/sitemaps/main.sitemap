@@ -1,0 +1,181 @@
+<sitemap label="Main">
+
+   <frame label="UHAB peripherials">
+      <text label="Contacts" icon="switch">
+         <text label="Port1">
+            <switch item="VContact1"/>
+            <switch item="VContact2"/>
+            <switch item="VContact3"/>
+            <switch item="VContact4"/>
+         </text>
+         <text label="Port2">
+            <switch item="VContact5"/>
+            <switch item="VContact6"/>
+            <switch item="VContact7"/>
+            <switch item="VContact8"/>
+         </text>
+         <text label="Port3">
+            <switch item="VContact8"/>
+            <switch item="VContact9"/>
+            <switch item="VContact10"/>
+            <switch item="VContact11"/>
+         </text>
+         <text label="Port4">
+            <switch item="VContact12"/>
+            <switch item="VContact13"/>
+            <switch item="VContact14"/>
+            <switch item="VContact15"/>
+         </text>
+         <text label="Port5">
+            <switch item="VContact16"/>
+            <switch item="VContact17"/>
+            <switch item="VContact18"/>
+            <switch item="VContact19"/>
+         </text>
+         <text label="Port6">
+            <switch item="VContact20"/>
+            <switch item="VContact21"/>
+            <switch item="VContact22"/>
+            <switch item="VContact23"/>
+         </text>
+         <text label="Port7">
+            <switch item="VContact24"/>
+            <switch item="VContact25"/>
+            <switch item="VContact26"/>
+            <switch item="VContact27"/>
+         </text>
+         <text label="Port8">
+            <switch item="VContact28"/>
+            <switch item="VContact29"/>
+            <switch item="VContact30"/>
+            <switch item="VContact31"/>
+            <switch item="VContact32"/>
+         </text>
+      </text>
+
+      <text label="LED" icon="slider">
+         <text label="Port1">
+            <switch item="VLed1"/>
+            <switch item="VLed2"/>
+            <switch item="VLed3"/>
+            <switch item="VLed4"/>
+            <switch item="VLed5"/>
+            <switch item="VLed6"/>
+            <switch item="VLed7"/>
+            <switch item="VLed8"/>
+         </text>
+         <text label="Port2">
+            <switch item="VLed9"/>
+            <switch item="VLed10"/>
+            <switch item="VLed11"/>
+            <switch item="VLed12"/>
+            <switch item="VLed13"/>
+            <switch item="VLed14"/>
+            <switch item="VLed15"/>
+            <switch item="VLed16"/>
+         </text>
+         <text label="Port3">
+            <switch item="VLed17"/>
+            <switch item="VLed18"/>
+            <switch item="VLed19"/>
+            <switch item="VLed20"/>
+            <switch item="VLed21"/>
+            <switch item="VLed22"/>
+            <switch item="VLed23"/>
+            <switch item="VLed24"/>
+         </text>
+         <text label="Port4">
+            <switch item="VLed25"/>
+            <switch item="VLed26"/>
+            <switch item="VLed27"/>
+            <switch item="VLed28"/>
+            <switch item="VLed29"/>
+            <switch item="VLed30"/>
+            <switch item="VLed31"/>
+            <switch item="VLed32"/>
+         </text>
+         <text label="Port5">
+            <switch item="VLed33"/>
+            <switch item="VLed34"/>
+            <switch item="VLed35"/>
+            <switch item="VLed36"/>
+            <switch item="VLed37"/>
+            <switch item="VLed38"/>
+            <switch item="VLed39"/>
+            <switch item="VLed40"/>
+         </text>
+         <text label="Port6">
+            <switch item="VLed41"/>
+            <switch item="VLed42"/>
+            <switch item="VLed43"/>
+            <switch item="VLed44"/>
+            <switch item="VLed45"/>
+            <switch item="VLed46"/>
+            <switch item="VLed47"/>
+            <switch item="VLed48"/>
+         </text>
+         <text label="Port7">
+            <switch item="VLed49"/>
+            <switch item="VLed50"/>
+            <switch item="VLed51"/>
+            <switch item="VLed52"/>
+            <switch item="VLed53"/>
+            <switch item="VLed54"/>
+            <switch item="VLed55"/>
+            <switch item="VLed56"/>
+         </text>
+         <text label="Port8">
+            <switch item="VLed57"/>
+            <switch item="VLed58"/>
+            <switch item="VLed59"/>
+            <switch item="VLed60"/>
+            <switch item="VLed61"/>
+            <switch item="VLed62"/>
+            <switch item="VLed63"/>
+            <switch item="VLed64"/>
+         </text>
+      </text>
+
+      <text label="Relays" icon="switch">
+         <switch item="VRelay1"/>
+         <switch item="VRelay2"/>
+         <switch item="VRelay3"/>
+         <switch item="VRelay4"/>
+         <switch item="VRelay5"/>
+         <switch item="VRelay6"/>
+         <switch item="VRelay7"/>
+         <switch item="VRelay8"/>
+      </text>
+
+      <text label="Temperature sensors" icon="temperature">
+         <text item="VTemp1"/>
+         <text item="VTemp2"/>
+         <text item="VTemp3"/>
+         <text item="VTemp4"/>
+         <text item="VTemp5"/>
+         <text item="VTemp6"/>
+         <text item="VTemp7"/>
+         <text item="VTemp8"/>
+      </text>
+
+   	<text label="DMX led">
+   		<frame label="Port1">
+     			<slider item="Dim1_1"/>
+     			<slider item="Dim1_2"/>
+     			<slider item="Dim1_3"/>
+   		</frame>      
+   		<frame label="Port2">
+     			<slider item="Dim2_1"/>
+     			<slider item="Dim2_2"/>
+     			<slider item="Dim2_3"/>
+   		</frame>      
+   		<frame label="Port3">
+     			<slider item="Dim3_1"/>
+     			<slider item="Dim3_2"/>
+     			<slider item="Dim3_3"/>
+   		</frame>           
+      </text>
+
+   </frame>
+ 
+</sitemap>

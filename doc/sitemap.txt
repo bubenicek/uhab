@@ -1,0 +1,98 @@
+================================================================================================
+
+                                    Sitemap syntax
+
+================================================================================================
+
+<sitemap label="Test">
+
+   <widget_type item="" label="" icon=""/>
+
+</sitemap>
+
+
+Popis atributu widgetu:
+-----------------------
+   item = Nazev itemy s kterou je widget propojeny
+   label = Titulek widgetu
+   icon = Nazev zobrazovane icony
+
+
+Typy widgetu:
+-------------
+
+<frame> - Zalozka/panel
+-----------------------
+  Slouzi k seskupovani dalsich widgetu
+example:
+
+   <frame name="Sceny" label="Scény domu" icon="outdoorlight">
+      <text name="Sceny" label="Výběr scén - >" icon="groundfloor">
+         <selection item="SceneBank1"  icon="slider" mappings="0=ODCHOD,1=PŘÍCHOD"/>
+         <selection item="SceneBank2"  icon="slider" mappings="0=TMA,1=INTIM,2=POTICHU,3=NAPLNO"/>
+     </text> 
+  </frame>   
+
+
+<text> - Zobrazeni textu/hodnoty
+-------------------------------------------
+example:
+   <frame name="Ostatni" label="Ostatní">
+      <text name="Rele" label="Relé - >" icon="switch-off">
+         <switch item="REL_Relay1" label="Relé 1"/>
+    	 <switch item="REL_Relay2" label="Relé 2"/>
+      </text>  
+      <text name="Teploty" label="Teploty - >" icon="temperature">
+         <text item="TEMP_VenkovniNaTerase" 					label="Venkovní [%.1f °C]" icon="temperature" />
+    	 <text item="TEMP_ZadveriVenModry" 					label="Zádveří [%.1f °C]" icon="temperature" />
+    	</text>  
+  </frame>
+
+<switch> - Binarni prepinac
+---------------------------
+example:
+   <switch item="REL_Relay1" label="Relé 1"/>
+
+
+<slider> - Posuvny scrollbar
+----------------------------
+example:
+   <slider item="DIMM_PokojJihHlavniVlevo" 		label="hlavní vlevo"  />
+
+
+<selection> - Vyber hodnoty z comboboxu
+---------------------------------------
+example:
+   <selection item="SceneBank1" mappings="0=ODCHOD,1=PŘÍCHOD"/>
+
+
+<setpoint> - Vyber hodnoty pomoci spinboxu
+-------------------------------------------
+example:
+   <setpoint item="Value2" min="16" max="28" step="0.5" icon="temperature"/>
+
+
+<image>  - Zobrazeni obrazku
+-------------------------------
+example:
+   <image url="http://www.google.com/image.png"/>
+
+
+<webview> - Zobrazeni web embedded stranky
+-------------------------------------------
+example:
+   <webview url="http://www.google.com" height="20"/>
+
+
+<colorpicker> - Vyber RGB barvy
+-------------------------------
+example:
+   <colorpicker item="ColorRGB" label="Select color/>
+
+
+<rollershutter> - Ovladac rolety
+---------------------------------
+example:
+   <rollershutter item="Shutter1"/>
+   
+

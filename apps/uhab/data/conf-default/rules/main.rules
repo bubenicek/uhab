@@ -1,0 +1,21 @@
+<rules>
+
+    <script>
+    </script>
+
+    <system>
+      <rule event="start" name="When system is started">
+        <action type="script"> 
+          TRACE("*** SYSTEM STARTED ***");
+
+        </action>
+      </rule>
+
+      <rule event="stop" name="When system is stopped">
+        <action type="script"> 
+          TRACE("*** SYSTEM STOPPED ***");
+        </action>
+      </rule>
+    </system>
+
+ </rules>

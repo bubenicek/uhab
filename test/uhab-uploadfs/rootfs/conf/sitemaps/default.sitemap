@@ -1,0 +1,16 @@
+<sitemap label="Default">
+
+   <frame label="UHAB peripherials">
+      <text label="Temperature sensors" icon="temperature">
+         <text item="VTemp1"/>
+         <text item="VTemp2"/>
+         <text item="VTemp3"/>
+         <text item="VTemp4"/>
+         <text item="VTemp5"/>
+         <text item="VTemp6"/>
+         <text item="VTemp7"/>
+         <text item="VTemp8"/>
+      </text>
+   </frame>
+ 
+</sitemap>

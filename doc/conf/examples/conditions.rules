@@ -1,0 +1,23 @@
+<rules>
+
+	<!-- Ukazka pouziti podminek v definici pravidel -->
+
+	<ObyvakUDveriCerveny>
+		<rule event="on_click">
+			<action condition="ObyvakuDveriModry.state == OFF" type="send_command" item="ObyvakZakladni" param="TOGGLE"/>
+			<action condition="ObyvakuDveriModry.state == ON" type="send_command" item="SceneBankObyvakKuchyn" param="UP"/>
+		</rule>
+
+		<rule event="on_doubleclick">
+			<action type="script">
+				if (ObyvakuDveriModry.state == OFF)
+					ObyvakZakladni.send_command(TOGGLE);
+
+				if (ObyvakuDveriModry.state == ON)
+					SceneBankObyvakKuchyn.send_command(UP);
+			</action>
+		</rule>
+
+	</ObyvakUDveriCerveny>
+   
+ </rules>

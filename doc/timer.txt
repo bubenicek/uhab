@@ -1,0 +1,80 @@
+Timer podporujeme ve dvou rezimech, bud v primo v skriptu si vytvoris timer s minimalni peridou 20ms a zaregistrujes mu funci, kterou ma volat pri vyprseni a nebo druhy zpusob je, ze se v items.cfg nadefinuje item typu timer s minimalnim tickem 1 sekunda, minuta, hodina, den v mesici.
+
+1) Pouziti timeru v rules
+-----------------------------------
+click na tlacitku spusti timer s periodou 100ms kdy provadi toggle dmx vystupu  a double click zastavi timer
+
+<script>
+   var test_timer=null;   // Objektu timer
+
+ // Callback test timeru, ktery togluje DMX output
+ function test_timer_callback() {
+        DimRGB1_R.send_command(TOGGLE);
+      }
+
+</script>
+
+<VContact1>
+   <VContact1>
+      <rule event="click">
+        <action type="script">
+
+        if (test_timer == null) {
+             // Vytvoreni periodickeho timeru pokud neexistuje
+             test_timer = timer_create(TIMER_PERIODIC, test_timer_callback);
+        }
+       else {
+           // Zastaveni uz beziciho timeru
+           test_timer.stop();
+      }
+       
+      // Spousteni timeru s periodou 100ms
+      test_timer.start(100);
+    </action>
+  </rule>
+
+      <rule event="doubleclick">
+        <action type="script">
+            if (test_timer != null) {
+                // Zastaveni beziciho timeru
+               test_timer.stop();
+ 
+               // Zruseni test timer
+               test_timer.destroy();
+            }
+     </action>
+   </rule>
+
+</VContact1>
+
+
+2) Timer v items.cfg
+----------------------------
+Timer se spusti automaticky pri startu systemu  a pri vyprseni vola eventu changed
+
+items.cfg
+-------------
+  <!-- Format casu timeru: sec min hour dom mon dow
+      day = den v mesici (1-31)
+      mon = mesic (1 - 12)
+      hour = hodina (0-23)
+      min = minuta (0 - 59)
+      sec = sekunda (0 - 59)
+   -->
+   <timer name="TimerSec" binding="system=timer:periodic,* * * * 1"/>     // volany kazdou sekundu
+   <timer name="TimerMin" binding="system=timer:periodic,* * * 1 *"/>    // kazdou minutu
+   <timer name="TimerHour" binding="system=timer:periodic,* * 1 * *"/>   // kazdou hodinu
+   <timer name="TimerDay" binding="system=timer:periodic,* * 11 00 00"/>  // kazdy den v 11:00 hodin
+   <timer name="TimerMonthDay" binding="system=timer:periodic,1 * 0 0 0"/>  // vzdy prvni den v mesici
+
+
+rules.cfg
+------------
+
+<TimerSec>
+   <rule event="changed">
+      <action type="send_command"  item="DimRGB1_R" param="TOGGLE"/>
+   </rule>
+</TimerSec>
+
+

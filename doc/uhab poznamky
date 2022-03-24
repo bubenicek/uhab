@@ -1,0 +1,68 @@
+
+
+
+    bone$ sudo apt-get update
+    bone$ sudo apt-get install fbi
+    bone$ wget 'http://beagleboard.org/static/uploads/BorisTux_w_Logo.png'
+    bone$ sudo fbi -d /dev/fb1 -T 1 -a BorisTux_w_Logo.png
+
+
+
+// Registrace service
+update-rc.d uhab defaults
+
+
+
+Modifikace uhab systemu
+=========================
+apt-get -y update
+apt-get -y install openvpn
+apt-get -y remove consolekit
+apt-get -y remove policykit
+
+
+/etc/fstab
+==========
+/dev/root / ext4 rw,relatime,sync,noatime,nodiratime,discard,data=ordered 0 0
+
+
+Inicializace displaye:
+======================
+
+/etc/modprobe.d/fbtft.conf
+---------------------------
+options fbtft_device name=sainsmart18  gpios=reset:5,dc:6  rotate=270
+
+/etc/rc.local
+--------------
+setterm -blank 0
+(cd /opt/uhab; ./start.sh &)
+
+
+/boot/uEnv.txt
+---------------
+console=ttyS0,115200
+extraargs=console=ttyS0,115200 console=tty0 consoleblank=0 rootwait panic=10 rootfstype=ext4 rootflags=discard
+nand_root=/dev/nand2
+
+
+/etc/modules
+-------------
+gpio_sunxi
+pwm_sunxi
+spi-sun7i
+fbtft_device
+fbcon
+w1-sunxi
+w1-gpio
+w1-therm
+
+
+
+/boot
+------
+boot.axf  boot.ini  linux  script.bin uEnv.txt  uImage
+
+
+
+

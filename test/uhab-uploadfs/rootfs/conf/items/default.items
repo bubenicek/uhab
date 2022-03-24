@@ -1,0 +1,15 @@
+<items> 
+
+   <group name="Temperature" label="Teplomery"/>
+  
+   <number name="VTemp1" label="Temp1 [%.1f °C]" group="Temperature" binding="vehabus=onewire:0"/>
+   <number name="VTemp2" label="Temp2 [%.1f °C]" group="Temperature" binding="vehabus=onewire:1"/>
+   <number name="VTemp3" label="Temp3 [%.1f °C]" group="Temperature" binding="vehabus=onewire:2"/>
+   <number name="VTemp4" label="Temp4 [%.1f °C]" group="Temperature" binding="vehabus=onewire:3"/>
+   <number name="VTemp5" label="Temp5 [%.1f °C]" group="Temperature" binding="vehabus=onewire:4"/>
+   <number name="VTemp6" label="Temp6 [%.1f °C]" group="Temperature" binding="vehabus=onewire:5"/>
+   <number name="VTemp7" label="Temp7 [%.1f °C]" group="Temperature" binding="vehabus=onewire:6"/>
+   <number name="VTemp8" label="Temp8 [%.1f °C]" group="Temperature" binding="vehabus=onewire:7"/>
+
+</items>
+

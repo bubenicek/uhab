@@ -1,0 +1,14 @@
+
+
+Vytvoreni device
+==================
+mknod /dev/dmx0 c  250 0
+mknod /dev/dmx1 c  250 1
+
+Associating multiple devices to same module – method 1
+
+The same kernel module can be used to associate functionality to different devices. This is implemented using the concept of major and minor numbers. One kernel module will be identified by the major number and the different devices that can be controlled controlled by the module will have different minor numbers.
+
+When different devices to be controlled by the same module are created using mknod, different minor numbers are provided. When an operation is performed on the file, the minor number of the device can be identified from the inode structure that is passed into the module. (if inode is not directly passed in, it can be read from the file structure pointer as filep->f_dentry->d_inode). The minor number is obtained using the macro iminor().
+
+Once you compile the module here and insert it, you have to create two nodes using the following comand: “sudo mknod filep1 c 250 1” and “sudo mknod filep1 c 250 0”. The module implements a forked read that returns a message according to the device minor number of the node in use.

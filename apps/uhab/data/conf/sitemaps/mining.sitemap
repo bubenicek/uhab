@@ -1,0 +1,31 @@
+<sitemap name="mining" label="Mining"> 
+  <text item="Miner1_status">
+      <text item="Miner1_gpu1_status">
+         <switch item="Miner1_gpu1_control"/> 
+      </text>
+      
+      <text item="Miner1_gpu2_status">
+         <switch item="Miner1_gpu2_control"/> 
+      </text>
+
+      <text item="Miner1_gpu3_status">
+         <switch item="Miner1_gpu3_control"/> 
+      </text>
+
+      <text item="Miner1_gpu4_status">
+         <switch item="Miner1_gpu4_control"/> 
+      </text>
+
+      <text item="Miner1_gpu5_status">
+         <switch item="Miner1_gpu5_control"/> 
+      </text>
+
+      <text item="Miner1_gpu6_status">
+         <switch item="Miner1_gpu6_control"/> 
+      </text>
+
+      <switch item="Miner1_control"/> 
+     
+  </text>  
+
+</sitemap>

@@ -1,0 +1,159 @@
+
+#sddm
+{	margin: 1px;
+	padding: 0;
+	z-index: 30}
+
+#sddm li
+{	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: left;
+	font: bold 11px arial}
+
+#sddm li a
+{	display: block;
+	margin: 0 1px 0 0;
+	padding: 4px 10px;
+	width: auto;
+	background: #5970B2;
+	color: #FFF;
+	text-align: center;
+	text-decoration: none}
+
+#sddm li a:hover
+{	background: #49A3FF}
+
+#sddm div
+{	position: absolute;
+	visibility: hidden;
+	margin: 0;
+	padding: 0;
+	background: #EAEBD8;
+	border: 1px solid #5970B2}
+
+	#sddm div a
+	{	position: relative;
+		display: block;
+		margin: 0;
+		padding: 5px 10px;
+		width: auto;
+		white-space: nowrap;
+		text-align: left;
+		text-decoration: none;
+		background: #EAEBD8;
+		color: #2875DE;
+		font: 11px arial}
+
+	#sddm div a:hover
+	{	background: #49A3FF;
+		color: #FFF}
+
+
+
+
+h1 
+{
+  text-align: center;
+  font-size:14pt;
+  font-family:arial,helvetica;
+  font-weight:bold;
+  padding:10px; 
+}
+
+body
+{
+  background-color: #fffeec;
+  color:black;
+
+  font-size:10pt;
+  font-family:arial,helvetica;
+  
+  margin:25px; 
+	background:#fff url(/table/images/bg.gif) repeat-x; 
+	color:#091f30;
+}
+
+.contentblock
+{  
+  margin: 1px;
+  width:99%;
+
+  float:left;
+  padding:2px;
+
+  font-size:8pt;
+  font-family:arial,helvetica;  
+
+	background: white;
+	border: 1px solid #5970B2}
+}
+
+.groupblock
+{  
+  margin: 1px;
+
+	background: white;
+	border: 1px solid #5970B2}
+}
+
+
+p.intro
+{
+  margin-left:20px;
+  margin-right:20px;
+
+  font-size:10pt;
+/*  font-weight:bold; */
+  font-family:arial,helvetica;  
+}
+
+p.clink
+{
+  font-size:12pt;
+  font-family:courier,monospace;  
+  text-align:center;
+}
+
+p.clink9
+{
+  font-size:9pt;
+  font-family:courier,monospace;  
+  text-align:center;
+}
+
+p
+{
+  padding-left:10px;
+}
+
+p.right
+{
+  text-align:right; 
+}
+  
+.button 
+{	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: left;
+	font: bold 11px arial}
+
+.button a
+{	display: block;
+	margin: 0 1px 0 0;
+	padding: 4px 10px;
+	width: auto;
+	background: #5970B2;
+	color: #FFF;
+	text-align: center;
+	text-decoration: none}
+
+.button a:hover
+{	background: #49A3FF}
+	  
+	  
+.CodeMirror {
+#  border: 1px solid #eee;
+  height: auto;
+}	  

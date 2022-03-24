@@ -1,0 +1,100 @@
+<!-- Definice fyzické struktury objektu (domu)-->
+<sitemap name="home" label="Pod Špičákem">
+
+	<frame name="Prizemi" label="Přízemí" icon="groundfloor">
+
+		<frame name="Obyvak" label="Obývák">
+
+		  <!-- Zobraz vsechny items ze skupiny Obyvak -->
+		  <group item="Obyvak"/>
+
+		  <!-- Zobraz widget pro vyber sceny -->
+		  <selection item="SceneBankObyvakKuchyn" label="Vyber sceny v obyvaku"/>
+
+		  <!-- Soupak pro dimmer -->
+                  <slider item="ObyvakStropPanel"/>
+
+		  <!-- Vyber barvy pro RGB svetlo -->
+                  <colorpicker item="DimmerRGB" icon="slider"/>
+
+	          <!-- Zobrazeni obrazku a na nem text -->
+                  <image url="http://localhost:8080/icon/splash-ipad-h.png" label="uHAB">
+                    <text label="http://www.uHAB.org" icon="icon"/>
+                  </image>
+
+		  <!-- Prehavac videa -->
+                  <video url="http://demo.openhab.org/Hue.m4v"/>
+
+		  <!-- Zobrazeni web widgetu -->
+                  <webview url="http://heise-online.mobi/" height="8"/>
+
+		  <!-- Zobrazeni spinace -->
+		  <switch item="ObyvakUDveri" label="Vypinac u dveri v obyvaku"/>
+
+		  <!-- Zobrazeni textu s hodnotou z item -->
+		  <text item="Temperature1" icon="temperature"/>
+
+		  <!-- Widget pro nastaveni hodnoty v definovanem rozsahu -->
+		  <setpoint item="Temperature1" minValue="16" maxValue="28" step="0.5"/>
+
+                  <!-- Widget pro zobrazeni grafu teploty s periodou prekeslovani minuta -->
+		  <chart item="Temperature1" period="minute" refresh="3600"/>
+
+		  <!-- Zobrazeni statickeho textu -->
+  		  <text label="Toto je staticky text"/>
+
+		</frame>
+
+
+		<frame name="Zadveri" label="Zádveří">	
+		  <dimmer item="ZadveriHlavni"/>
+		</frame>
+
+		<frame name="Predsin" label="Předsíň">
+		  <dimmer item="PredsinHlavni"/>
+		  <dimmer item="PredsinOrientacni"/>
+		</frame>
+
+		<frame name="KoupelnaSpodni" label="Koupelna spodní">
+		  <group item="KoupelnaSpodni"/>
+		</frame>
+
+		<frame name="Pokoj" label="Pokoj">
+		  <group item="Pokoj"/>
+		</frame>
+
+		<frame name="Sklep" label="Sklep">
+		  <group item="Sklep"/>
+		</frame>
+
+		<frame name="Techmistnost" label="Technická místnost">
+		  <group item="Techmistnost"/>
+		</frame>
+
+		<frame name="Kuchyn" label="Kuchyň">
+		  <group item="Kuchyn"/>
+		</frame>
+
+		<frame name="Terasa" label="Terasa">
+		  <group item="Terasa"/>
+		</frame>
+	</frame>
+
+
+	<frame name="Podkrovi" label="Podkroví" icon="firstfloor">
+		<frame name="Schodiste" label="Schodiště">
+		</frame>
+		<frame name="KoupelnaHorni" label="Koupelna horní">
+		</frame>
+		<frame name="Komora" label="Komora">
+		</frame>
+		<frame name="Loznice" label="Ložnice">
+		</frame>
+		<frame name="PokojVychod" label="Pokoj Východ">
+		</frame>
+		<frame name="PokojJih" label="Pokoj Jih">
+		</frame>
+		<frame name="PokojZapad" label="Pokoj Západ">
+		</frame>
+	</frame>
+</sitemap>

@@ -1,0 +1,41 @@
+<items>
+
+   <group name="Miner1" label="Rig1"/>
+   <group name="Miner2" label="Rig2"/>
+
+   <string name="Miner1_status"       label="Miner1  %s" group="Miner1" binding="mining=miner1:-1,status"/>  
+   <switch name="Miner1_control"      label="Miner1" group="Miner1" binding="mining=miner1:-1,control-gpu"/>  
+   <string name="Miner1_gpu1_status"  label="GPU1  %s" group="Miner1" binding="mining=miner1:0,status"/>     
+   <switch name="Miner1_gpu1_control" label="GPU1" group="Miner1" binding="mining=miner1:0,control-gpu"/>  
+   <string name="Miner1_gpu2_status"  label="GPU2  %s" group="Miner1" binding="mining=miner1:1,status"/>     
+   <switch name="Miner1_gpu2_control" label="GPU2" group="Miner1" binding="mining=miner1:1,control-gpu"/>  
+   <string name="Miner1_gpu3_status"  label="GPU3  %s" group="Miner1" binding="mining=miner1:2,status"/>     
+   <switch name="Miner1_gpu3_control" label="GPU3" group="Miner1" binding="mining=miner1:2,control-gpu"/>  
+   <string name="Miner1_gpu4_status"  label="GPU4  %s" group="Miner1" binding="mining=miner1:3,status"/>     
+   <switch name="Miner1_gpu4_control" label="GPU4" group="Miner1" binding="mining=miner1:3,control-gpu"/>  
+   <string name="Miner1_gpu5_status"  label="GPU5  %s" group="Miner1" binding="mining=miner1:4,status"/>     
+   <switch name="Miner1_gpu5_control" label="GPU5" group="Miner1" binding="mining=miner1:4,control-gpu"/>  
+   <string name="Miner1_gpu6_status"  label="GPU6  %s" group="Miner1" binding="mining=miner1:5,status"/>     
+   <switch name="Miner1_gpu6_control" label="GPU6" group="Miner1" binding="mining=miner1:5,control-gpu"/>  
+
+
+<!--  
+   <string name="Miner2_status" label="Miner2  %s" group="Miner2" binding="mining=miner2:-1,status"/>  
+   <switch name="Miner2_control" label="Miner2" group="Miner2" binding="mining=miner2:-1,control-gpu"/>  
+   <string name="Miner2_gpu1_status" label="GPU1  %s" group="Miner2" binding="mining=miner2:0,status"/>     
+   <switch name="Miner2_gpu1_control" label="GPU1" group="Miner2" binding="mining=miner2:0,control-gpu"/>  
+   <string name="Miner2_gpu2_status" label="GPU2  %s" group="Miner2" binding="mining=miner2:1,status"/>     
+   <switch name="Miner2_gpu2_control" label="GPU2" group="Miner2" binding="mining=miner2:1,control-gpu"/>  
+   <string name="Miner2_gpu3_status" label="GPU3  %s" group="Miner2" binding="mining=miner2:2,status"/>     
+   <switch name="Miner2_gpu3_control" label="GPU3" group="Miner2" binding="mining=miner2:2,control-gpu"/>  
+   <string name="Miner2_gpu4_status" label="GPU4  %s" group="Miner2" binding="mining=miner2:3,status"/>     
+   <switch name="Miner2_gpu4_control" label="GPU4" group="Miner2" binding="mining=miner2:3,control-gpu"/>  
+   <string name="Miner2_gpu5_status" label="GPU5  %s" group="Miner2" binding="mining=miner2:4,status"/>     
+   <switch name="Miner2_gpu5_control" label="GPU5" group="Miner2" binding="mining=miner2:4,control-gpu"/>  
+   <string name="Miner2_gpu6_status" label="GPU6  %s" group="Miner2" binding="mining=miner2:5,status"/>     
+   <switch name="Miner2_gpu6_control" label="GPU6" group="Miner2" binding="mining=miner2:5,control-gpu"/>  
+
+-->       
+
+</items>
+

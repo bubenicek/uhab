@@ -1,0 +1,124 @@
+0.35
++ generovani rules.js souboru do temp adresare
++ logovani do /tmp adresare
++ vypnuti httpd logu
+
+0.34
++ fix. httpd max number of connections
++ added rest-api method for android client compatibility
+
+0.33
++ fix. http binding, reading port number from config
+
+0.32
++ podpora runtime zapinani/vypinani trace vypisu. Pouziva se nove makro TRACE_TAG(tag_name) ktere definuje lokalni struct ktera ma atribut enabled a nazev tagu
++ fix. rest_api pro android app 2.x
+
+0.31
++ fix. mining poll time binding params
+
+0.30
++ fix vypis systime, spravne formatovani poctu dnu
+
+0.29
++ fix. hal_time_ms  pouziti typu unit64_t
+
+0.26
++ mining binding interface
++ fix sitemap label
+
+0.24
++ fix. system linux timers
+
+0.23
++ fix. nacitani obrazku v sitemap ulozeych na lokale nahrazenim klicoveho slova localhost IP addresou
+      !!! obrazek musi byt ulozeny v adresari /opt/uhab/www/images !!!
+     example: <image url="http://localhost/images/image.png"/>
+
+0.22
++ fix. javascript evaluation error
+
+0.21
++ fix. upload icons
+
+0.20
++ fix. dmx stmivani kdy fader nedojel az do 0 pokud byl fader UP prerusen opetovnym stickem vypinace signalizujici fader DOWN
++ waitfor bus event podle widgetu obsahujici danou item na ktere nastane udalost. Optimalizace odesilani zmen do android app
++ podpora webview widgetu pro zobrazovani weboveho obsahu v android app, napr. grafy
+
+0.19
++ optimalizace DMX bindingu
+
+0.17
++ fix. DMX fader, optimalizace synchronizace dmx output bufferu
+
+0.16
++ rotace logovacich soboru
++ zobrazovani systemoveho casu v logu
+
+0.15
++ some fix
+
+0.14
++ Podpora pro spusteni periodickeho dimerovani na command DIM_START a zastaveni pomoci DIM_STOP kdy se ulozi aktualni nastavena hodnota
+ Example: Svetlo se rozsviti pri zmacknuti tlacitka s nabehem pomoci dimeru. Pokud tlacitko drzim delsi dobu prejde zavola se event longpress a
+         spusti se periodicke dimerovani pomoci prikzau DIM_START zastaveni dimerovani je po uvolneni tlacitka kdy je generovan event OFF a posle se
+         prikaz DIM_STOP
+
+  V dmx binding konfigurace je mozno pomoci parametru dmx.periodical_fadetime nastavit v ms jak dlouho pobezi rampa od 0 - 255
+
+  binding/dmx
+  -----------
+  dmx.poll=20
+  dmx.fadetick=20
+  dmx.periodical_fadetime=10000
+
+  items:
+  -----
+   <dimmer name="Dim1" label="Dim1" binding="dmx=dmx2:1 ON=2000:255 OFF=2000:0"/>
+
+  rules
+  -----
+  	<VContact1>
+    	<rule event="ON">
+        <action type="send_command" item="Dim1" param="TOGGLE"/>
+      </rule>
+     <rule event="OFF">
+       <action type="send_command" item="Dim1" param="DIM_STOP"/>
+     </rule>
+     <rule event="longpress">
+       <action type="send_command" item="Dim1" param="DIM_START"/>
+     </rule>
+	</VContact1>
+
+
+0.13
++ fix. DMX fader
+
+0.12
++ příkaz TOGGLE u dimmerů
++ nevysílá se kanál 0. Oba dimmery (veha i čína) začínají na 0, ne na 1
+
+
+0.11
++ Podpora timeru v items
++ vehabus inputs deglitch filter
+
+0.10
++ pridan paramater min_channels_count do dmx konfigurace pro specifikaci minimalniho vysilaneho poctu kanalu
++ pri zmene hodnoty dmx pomoci slideru se nastavuje hodnota do prikazu ON
++ backup/restore konfigurace systemu
+
+0.8
++ fix. predavani parametru z jscriptu
+
+0.6
++ pridana nova rest-api metoda pro nacteni repositories, fix. pokud nastala chyba v sitemapach tak se nedala provest z webu uprava
+
+0.5
++ Vytvorit thread pool pro httpd server (max. pocet bezicich vykonych vlaken)
+
+0.4
++ rest API pro nahravani ikon
++ fix. load repository
+

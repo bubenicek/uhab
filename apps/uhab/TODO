@@ -1,0 +1,53 @@
+[ ] Ke kazde service pridat parametr enabled typu bool
+[x] Skupinove posilani udalosti - otestovat 
+
+HW ver. 0.1
+------------
+[ ] USB
+[x] LCD display
+[ ] ADC vstupy
+[X] OC outputs
+[ ] DALI
+[ ] OC inputs
+[ ] Zwave
+[ ] WIFI
+[x] one wire
+
+
+[x] deglitch filter vehabus inputs
+[x] OC inputs/outputs binding
+[x] fix. pri zmene item state z rest api zmenit hodnotu i v javascriptu properties
+[x] modbus update item state after success setting
+[x] do rules handleru predavat pouze prijatou hodnotu stavu a zmenu items stavu provest az po ukonceni handleru
+[x] nastavovat priznak u itemy ze je vykonavan event handler z JS aby pri volani update metody na iteme se neprovadelo
+    volani dalsich event handleru a tim nedoslo k zacykleni
+[x] dmx binding pri nastavovani typu number tak provest prepocet z % na hodnotu
+[x] Vytvorit thread pool pro httpd server (max. pocet bezicich vykonych vlaken)
+[x] moznosta nahravani ikon
+[x] fix. timer delay
+[x] faders do dmx
+[x] Upgrade systemu
+[x] Podpora vice sitemaps najednou
+[x] parse stereotype
+[x] DMX double bufer
+[x] Moznost zadavat do items command, number, string pomoci API z javascriptu Items.send_command
+[x] Implementovat zakladni UI widgety (Webview, Slider, Selection, Setpoint)
+[x] Implementovat dalsi UI widgety do sitemapy, (ColorPicker, Chart, Image, List, Group)
+[x] do rules main pridat sekci <script src="test.js"/>
+[x] mutex pro operace s item state !!
+[x] operator < >  v scriptu
+[x] Obsluha svetelnych scen
+[x] Detekovani click, doubleclick, longclick
+[x] Delay action
+[x] Pridat timer do JS
+[x] do rules main pridat sekci <items> v ktere budou jednotlive pravidla pro itemy
+[x] do rules main pridat sekci <javasript></javascript>
+[x] nacteni globalni konfigurace systemu
+[x] Spousteni transformacni funkce pro service pri prijmu hodnoty
+[x] DMX512 binding
+[x] SNMP binding 
+[x] do linku pridat ip adresu z ktereho prisel pozadavek !!
+[x] nacteni cfg rules
+[x] nacitani cfg scen
+[x] JS pravidla spoustet z FS
+[x] cteni staticke konfigurace z romfs

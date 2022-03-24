@@ -1,0 +1,768 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+   <link rel="stylesheet" type="text/css" href="style.css">  
+   <title>uHAB controller</title>
+</head>
+
+<!-- Ajax tools -->
+<script type="text/javascript" src="ajax/ajax.js"></script>
+
+<!-- Codemirror -->
+<link rel=stylesheet href="codemirror/lib/codemirror.css">
+<script src="codemirror/lib/codemirror.js"></script>
+<script src="codemirror/mode/xml/xml.js"></script>
+<script src="codemirror/mode/javascript/javascript.js"></script>
+
+<!-- Accord -->
+<script type="text/javascript" src="accord/accord.js"></script>
+<link rel="stylesheet" href="accord/accord.css" type="text/css" />
+
+<!-- Table -->
+<link rel="stylesheet" href="table/table.css" />
+<script type="text/javascript" src="table/table.js"></script>
+
+
+<!-- Tabber -->
+<link rel="stylesheet" type="text/css" href="tabber/tabber.css" MEDIA="screen">  
+<script type="text/javascript" src="tabber/tabber.js"></script>
+
+<script type="text/javascript">
+
+/* Optional: Temporarily hide the "tabber" class so it does not "flash"
+   on the page as plain HTML. After tabber runs, the class is changed
+   to "tabberlive" and it will appear. */
+
+document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+
+var tabberOptions = {
+
+  /* Optional: instead of letting tabber run during the onload event,
+     we'll start it up manually. This can be useful because the onload
+     even runs after all the images have finished loading, and we can
+     run tabber at the bottom of our page to start it up faster. See the
+     bottom of this page for more info. Note: this variable must be set
+     BEFORE you include tabber.js.
+  */
+  'manualStartup':true,
+
+  /* Optional: code to run after each tabber object has initialized */
+
+  'onLoad': function(argsObj) {
+    /* Display an alert only after tab2 */
+    if (argsObj.tabber.id == 'tab2') {
+      alert('Finished loading tab2!');
+    }
+  },
+
+  /* Optional: code to run when the user clicks a tab. If this
+     function returns boolean false then the tab will not be changed
+     (the click is canceled). If you do not return a value or return
+     something that is not boolean false, */
+
+  'onClick': function(argsObj) {
+
+    var t = argsObj.tabber; /* Tabber object */
+    var id = t.id; /* ID of the main tabber DIV */
+    var i = argsObj.index; /* Which tab was clicked (0 is the first tab) */
+    var e = argsObj.event; /* Event object */
+
+    setTimeout(function() {
+         items_editor.refresh();
+         rules_editor.refresh();
+         sitemap_editor.refresh();
+         binding_editor.refresh();
+    }, 50);
+
+
+//    if (id == 'tab2') {
+//      return confirm('Swtich to '+t.tabs[i].headingText+'?\nEvent type: '+e.type);
+//    }
+
+  },
+
+  /* Optional: set an ID for each tab navigation link */
+  'addLinkId': true
+
+};
+
+</script>
+
+
+
+<!-- Application -->
+<script>
+
+var CFG_SYSINFO_REFRESH_TIME = 1000;
+
+var binding_editor;   
+var items_editor;
+var rules_editor;
+var sitemap_editor;   
+var syslog_editor;   
+
+var repository_name;
+   
+var reload_tmo = 1000;
+var reload_timer = 0;
+
+var slider1 = null;
+var prev_repository_name = null;
+
+function eventFire(el, etype){
+  if (el.fireEvent) {
+    el.fireEvent('on' + etype);
+  } else {
+    var evObj = document.createEvent('Events');
+    evObj.initEvent(etype, true, false);
+    el.dispatchEvent(evObj);
+  }
+}
+   
+// System log refresh
+function syslog_refresh() 
+{
+   var url; 
+
+   if (document.getElementById('jsrules_show').checked)
+      url = "/rest/system/rules";
+   else
+      url = "/rest/system/log";
+
+   ajax_get(url, function(status, response) {
+   
+      if (status == 200)
+      {
+         var cursor = syslog_editor.getCursor();
+     
+         syslog_editor.setValue(response);
+        
+         if (document.getElementById('autoscroll').checked)
+            syslog_editor.setCursor(syslog_editor.doc.lineCount());
+         else
+            syslog_editor.setCursor(cursor);
+      }
+
+      // stop previous timer
+      if (reload_timer != null)
+      {
+         window.clearTimeout(reload_timer);
+         reload_timer = null;
+      }
+
+      if (!document.getElementById('jsrules_show').checked) 
+      {
+         // set new timeout when is > 0
+         reload_tmo = document.getElementById("refresh_time").value * 1000;
+         if (reload_tmo > 0)
+            reload_timer = window.setTimeout('syslog_refresh()', reload_tmo);   
+      }
+   });
+}  
+
+// Load repository  
+function load_repository_config()
+{
+   repository_name = document.getElementById('reponame').value;
+   
+   if (prev_repository_name != null)
+   {
+      // Save previoous repository
+
+   }
+   
+   prev_repository_name = repository_name;
+   
+   sitemap_editor.setValue("");
+   rules_editor.setValue("");
+   items_editor.setValue("");
+   
+   ajax_get("/rest/items/config/" + repository_name, function(status, response) {
+   
+      if (status == 200)
+      {
+         items_editor.setValue(response);
+         ajax_get("/rest/rules/config/" + repository_name, function(status, response) {
+         
+            if (status == 200)
+            {
+               rules_editor.setValue(response);
+               ajax_get("/rest/sitemaps/config/" + repository_name, function(status, response) {
+
+                  if (status == 200)
+                  {
+                     sitemap_editor.setValue(response);                                          
+                  }
+                  else
+                     alert("Repository " + repository_name + "not found");
+               
+               });
+            }
+            else
+            {
+               alert("Repository " + repository_name + "not found");
+            }
+            
+         });
+      }
+      else
+      {
+         alert("Repository " + repository_name + "not found");
+      }
+         
+   });
+}  
+
+// Save repository  
+function save_repository_config()
+{
+   repository_name = document.getElementById('reponame').value;
+  
+   ajax_put("/rest/items/config/" + repository_name, items_editor.getValue(), function(status, response) {
+   
+      if (status == 200)
+      {
+         ajax_put("/rest/rules/config/" + repository_name, rules_editor.getValue(), function(status, response) {
+         
+            if (status == 200)
+            {
+               ajax_put("/rest/sitemaps/config/" + repository_name, sitemap_editor.getValue(), function(status, response) {
+
+                  if (status == 200)
+                     alert("Repository '" + repository_name + "' saved");
+                  else
+                     alert("Save repository failed");
+               });
+            }
+            else
+            {
+               alert("Save failed");
+            }
+            
+         });
+      }
+      else
+      {
+         alert("Save failed");
+      }
+         
+   });
+}
+
+function new_repository_config()
+{
+   repository_name = prompt("Enter new repository name");
+   if (repository_name != null)
+   {
+      items_editor.setValue("<items>\n\n</items>\n");
+      rules_editor.setValue("<rules>\n\n</rules>\n");
+      sitemap_editor.setValue("<sitemap name=\"" + repository_name + "\" label=\"" + repository_name + "\">\n\n" + 
+                              "   <frame label=\"" + repository_name + "\">\n\n   </frame>\n\n" + 
+                              "</sitemap>\n");
+   
+      var select = document.getElementById("reponame");
+      var option = document.createElement("option");
+      option.text = repository_name;
+      select.add(option);      
+      
+      select.selectedIndex = select.length-1;
+   
+      save_repository_config();
+   }
+}   
+
+function delete_repository_config()
+{
+   repository_name = document.getElementById('reponame').value;
+   
+   if (repository_name == "")
+   {
+      alert("Enter repository name");
+      return;
+   }
+ 
+   if (confirm("Are you sure to delete '" + repository_name + "' repository ?")) {
+  
+      ajax_delete("/rest/items/config/" + repository_name, function(status, response) {
+      
+         if (status == 200)
+         {
+            ajax_delete("/rest/rules/config/" + repository_name, function(status, response) {
+            
+               if (status == 200)
+               {
+                  ajax_delete("/rest/sitemaps/config/" + repository_name, function(status, response) {
+
+                     if (status == 200)
+                     {
+                        var select = document.getElementById("reponame");
+                        select.remove(select.selectedIndex); 
+                        alert("Repository '" + repository_name + "' deleted");                    
+                     }
+                     else
+                        alert("Delete repository failed, status: " + status);
+                  });
+               }
+               else
+               {
+                  alert("Delete failed");
+               }
+               
+            });
+         }
+         else
+         {
+            alert("Delete failed");
+         }
+            
+      });
+   }
+
+}   
+
+function load_repos()
+{
+   ajax_get("/rest/repositories", function(status, response) { 
+     
+      if (status == 200)
+      {  
+         var i;
+         var txt = "";       
+         var data = JSON.parse(response);    
+         
+         var select = document.getElementById("reponame");
+                  
+         for (i = 0; i < data.length; i++)
+         {
+            var option = document.createElement("option");
+            option.text = data[i].name;
+            select.add(option);         
+         }
+         
+         load_repository_config();            
+      }
+   });   
+}
+
+
+
+// Load binding config
+function load_binding_config()
+{
+   var binding_name = document.getElementById('binding').value;
+   binding_editor.setValue("");
+
+   ajax_get("/rest/bindings/config/" + binding_name, function(status, response) {
+   
+      if (status == 200)
+         binding_editor.setValue(response);
+      else
+         alert("Binding not found");
+   });
+}  
+
+function save_binding_config()
+{
+   var binding_name = document.getElementById('binding').value;
+
+   ajax_put("/rest/bindings/config/" + binding_name, binding_editor.getValue(), function(status, response) {
+      
+         if (status == 200)
+            alert("Binding '" + binding_name + "' saved");
+         else
+            alert("Save binding failed");
+    });
+}  
+
+function load_bindings()
+{
+   ajax_get("/rest/bindings", function(status, response) { 
+     
+      if (status == 200)
+      {  
+         var i;
+         var txt = "";       
+         var data = JSON.parse(response);    
+         
+         var select = document.getElementById("binding");
+                  
+         for (i = 0; i < data.length; i++)
+         {
+            var option = document.createElement("option");
+            option.text = data[i].id;
+            select.add(option);         
+         }
+         
+         load_binding_config();            
+      }
+   });   
+}
+
+   
+// Restart system
+function system_restart()
+{
+   ajax_put("/rest/system/restart", null, function(status, response) {
+   
+      if (status != 200)
+         alert("System restart failed");
+   });
+
+}
+
+function system_info_refresh()
+{
+   // Sysinfo
+   ajax_get("/rest/system/info", function(status, response) {   
+   
+      if (status == 200)
+      {        
+         var data = JSON.parse(response);
+         document.getElementById('status').value = data.sysinfo.status;
+         document.getElementById('init_flags').value = data.sysinfo.init_flags;
+         document.getElementById('uptime').value = data.sysinfo.uptime;
+         document.getElementById('systime').value = data.sysinfo.systime;
+         document.getElementById('hwver').value = data.sysinfo.hwver;
+         document.getElementById('fwver').value = data.sysinfo.fwver;
+         document.getElementById('total_used_memory').value = data.sysinfo.meminfo.total_used_memory;
+         document.getElementById('total_heap_size').value = data.sysinfo.meminfo.total_heap_size;
+         document.getElementById('free_heap_size').value = data.sysinfo.meminfo.free_heap_size;
+      }
+   
+      // items
+      ajax_get("/rest/items", function(status, response) { 
+        
+         if (status == 200)
+         {  
+            var i;
+            var txt = "";       
+            var data = JSON.parse(response);            
+                     
+            for (i = 0; i < data.length; i++)
+            {
+               txt += "<tr>";
+               txt += "<td>" + data[i].name + "</td>";
+               txt += "<td>" + data[i].label + "</td>";
+               txt += "<td>" + data[i].type + "</td>";
+               txt += "<td>" + data[i].state + "</td>";               
+               txt += "</tr>";
+            }            
+            
+            document.getElementById('items_body').innerHTML = txt;            
+            document.getElementById('items_label').innerHTML = "Items (" + data.length + ")";
+            
+            if (slider1 == null) {
+               slider1 = new accordion.slider("slider1");
+               slider1.init("slider", 0,"open");
+            }
+            
+         }
+      });   
+   
+   });
+   
+   setTimeout(system_info_refresh, CFG_SYSINFO_REFRESH_TIME);
+}
+   
+
+function upgrade_system() 
+{
+   var upgrade = document.getElementById("upgrade");
+   var file = upgrade.files[0];
+
+   ajax_post_file("/rest/system/upgrade", file, function(status, response) {
+   
+      if (status == 200)
+         alert("Upgrade done, restart system !");
+      else
+         alert("System upgrade failed, response: " + response);
+   });
+
+   return false;
+};
+
+function restore_system() 
+{
+   var restore = document.getElementById("restore");
+   var file = restore.files[0];
+
+   ajax_post_file("/rest/system/restore", file, function(status, response) {
+   
+      if (status == 200)
+         alert("Restore system configuration done, restart system !");
+      else
+         alert("Restore system failed, response: " + response);
+   });
+
+   return false;
+};
+
+function upload_icon()
+{
+   var icon = document.getElementById("upload_icon_name");
+   var file = icon.files[0];
+
+   var filename = icon.value.split(/(\\|\/)/g).pop();
+
+   ajax_post_file("/rest/icon/" + filename, file, function(status, response) {
+  
+      if (status == 200)
+         alert("Upload icon '" + filename + "' done");
+      else
+         alert("Upload icon failed, response: " + response);
+   });
+
+   return false;
+};
+   
+</script>
+
+
+<body>
+
+<div class="tabber">
+
+   <div class="tabbertab">
+      <h2>System</h2>
+    
+         <div id="accordion">
+         <dl class="accordion" id="slider">
+
+            <dt>System information</dt>
+            <dd><span>
+               <div id="sysinfo_sys">
+                  <table>
+                    <tr>
+                      <td>Status</td><td><input type="text" id="status" readonly></td>
+                    </tr>
+                    <tr>
+                      <td>Status code</td><td><input type="text" id="init_flags" readonly></td>
+                    </tr>
+                    <tr>
+                      <td>Uptime</td><td><input type="text" id="uptime" readonly></td>
+                    </tr>
+                    <tr>
+                      <td>System time</td><td><input type="text" id="systime" readonly></td>
+                    </tr>
+                    <tr>
+                      <td>HW ver</td><td><input type="text" id="hwver" readonly></td>
+                    </tr>
+                    <tr>
+                      <td>FW ver</td><td><input type="text" id="fwver" readonly></td>
+                    </tr>
+                    <tr>
+                      <td>Used heap size</td><td><input type="text" id="total_used_memory" readonly></td>
+                    </tr>
+                    <tr>
+                      <td>Heap size</td><td><input type="text" id="total_heap_size" readonly></td>
+                    </tr>
+                    <tr>
+                      <td>Free heap size</td><td><input type="text" id="free_heap_size" readonly></td>
+                    </tr>
+                  </table>
+               </div>
+            </span></dd>
+
+            <dt id="items_label">Items</dt>
+            <dd><span>
+               <div>
+                  <table cellpadding="0" cellspacing="0" border="0" id="items_table" class="sortable">
+                  <thead>
+                     <tr>
+                        <th><h3>Name</h3></th>
+                        <th><h3>Label</h3></th>
+                        <th><h3>Type</h3></th>
+                        <th><h3>State</h3></th>
+                     </tr>
+                  </thead>
+                  <tbody id="items_body">
+                  </tbody>
+                  </table>
+               </div>
+            </span></dd>
+
+            <dt>Upgrade</dt>
+            <dd><span>
+               <div>
+                  <form action="/rest/null" method="post" onsubmit="return upgrade_system();">
+                     <input type="file" name="upgrade" id="upgrade">
+                     <input type="submit" value="Upgrade">
+                  </form>
+               </div>
+            </span></dd>
+
+            <dt>Backup / Restore configuration</dt>
+            <dd><span>
+               <div>
+                  <form action="/rest/system/backup" method="get">
+                     <input type="submit" value="Backup system">
+                  </form>
+                  
+                  <form action="/rest/null" method="post" onsubmit="return restore_system();">
+                     <input type="submit" value="Restore system">
+                     <input type="file" name="restore" id="restore">
+                  </form>                  
+               </div>
+            </span></dd>
+
+            <dt>Upload icon</dt>
+            <dd><span>
+               <div>
+                  <form action="/rest/null" method="post" onsubmit="return upload_icon();">
+                     <input type="file" id="upload_icon_name">
+                     <input type="submit" value="Upload">
+                  </form>
+               </div>
+            </span></dd>
+
+         </dl>
+         </div>
+    
+      <table>         
+<!--         <tr><td><input type="button" value="Refresh" onclick="system_info_refresh()"></td></tr> -->
+         <tr><td><input type="button" value="Restart system" onclick="system_restart()"></td></tr>
+      </table>
+
+   </div>  
+
+   <div class="tabbertab">
+      <h2>Configuration</h2>
+          <div class="tabber">
+
+            <div class="tabbertab" id="bindings_tab">
+               <h2>Repository</h2>
+               <br>
+               <table>
+                  <tr>
+                     <td>Repository</td>
+                     <td><select id="reponame" name="reponame" onchange="load_repository_config()"/></td>
+                     <td><input type="button" value="Save" onclick="save_repository_config()"></td>
+                     <td><p/></td>
+                     <td><input type="button" value="New" onclick="new_repository_config()"></td>
+                     <td><input type="button" value="Delete" onclick="delete_repository_config()"></td>
+                  </tr>
+               </table>       
+
+               <div class="tabber">
+                  
+                  <div class="tabbertab" id="items_tab">
+                     <h2>Items</h2>
+                     <textarea id="items_config" name="items_config"></textarea>
+                  </div>
+
+                  <div class="tabbertab" id="rules_tab">
+                     <h2>Rules</h2>
+                     <textarea id="rules_config" name="rules_config"></textarea>
+                  </div>
+
+                  <div class="tabbertab" id="sitemap_tab">
+                     <h2>Sitemap</h2>
+                     <textarea id="sitemap_config" name="sitemap_config"></textarea>
+                  </div>
+
+               </div>
+            </div>
+            
+            <div class="tabbertab" id="bindings_tab">
+               <h2>Bindings</h2>
+               <br>
+               <table>
+                  <tr>
+                     <td>Binding</td>
+                     <td><select id="binding" name="binding" onchange="load_binding_config()"/></td>
+                     <td><input type="button" value="Save" onclick="save_binding_config()"></td>
+                  </tr>
+               </table>    
+               <textarea id="binding_config" name="binding_config"></textarea>   
+            </div>
+            
+         </div>
+   </div>     
+
+   <div class="tabbertab">
+      <h2>Log</h2>
+      <textarea id="syslog" name="syslog"></textarea>
+      
+      <table>
+         <tr>
+            <td>Refresh time(sec)</td>
+            <td><input type="text" id="refresh_time" value="0" style="width: 30px;"></td>
+            <td><input type="button" value="Refresh" onclick="syslog_refresh()"></td>     
+
+            <td>Auto scroll</td>
+            <td><input type="checkbox" id="autoscroll" name="autoscroll" enabled/></td>
+            
+            <td>Show javascript rules</td>
+            <td><input type="checkbox" id="jsrules_show" name="jsrules_show" enabled/></td>
+
+         </tr>
+      </table>
+
+   </div>  
+   
+</div>
+
+                
+<script>
+
+    var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    var log_height = height - 120;
+    var editor_height = height - 190;
+     
+    binding_editor = CodeMirror.fromTextArea(document.getElementById("binding_config"), {
+      lineNumbers: false,
+      mode: "text",
+      tabSize: 3
+    });
+    binding_editor.setSize(null, editor_height - 40);
+
+    items_editor = CodeMirror.fromTextArea(document.getElementById("items_config"), {
+      lineNumbers: false,
+      mode: "text/xml",
+      matchBrackets: true,
+      tabSize: 3
+    });
+    items_editor.setSize(null, editor_height);
+    
+    rules_editor = CodeMirror.fromTextArea(document.getElementById("rules_config"), {
+      lineNumbers: false,
+      mode: "text/xml",
+      tabSize: 3
+    });
+    rules_editor.setSize(null, editor_height);
+
+    sitemap_editor = CodeMirror.fromTextArea(document.getElementById("sitemap_config"), {
+      lineNumbers: false,
+      mode: "text/xml",
+      tabSize: 3
+    });
+    sitemap_editor.setSize(null, editor_height);
+
+    syslog_editor = CodeMirror.fromTextArea(document.getElementById("syslog"), {
+      mode: "text",
+      readOnly: true
+    });
+    syslog_editor.setSize(null, log_height);
+
+
+   // Since we specified manualStartup=true, tabber will not run after
+   // the onload event. Instead let's run it now, to prevent any delay
+   // while images load.
+   tabberAutomatic(tabberOptions);
+
+   //var slider1=new accordion.slider("slider1");
+   //slider1.init("slider", 0,"open");
+    
+   syslog_refresh();
+   system_info_refresh();
+   load_bindings();
+   load_repos();
+       
+</script>         
+         
+             
+    
+</body>
+
+

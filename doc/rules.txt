@@ -1,0 +1,162 @@
+================================================================================================
+
+                                    Pravidla syntax
+
+================================================================================================
+
+<rules>
+
+   <script>
+   
+   ... Javacript code ...
+   
+   </script>
+
+   <item_name>
+      <rule event="name">
+         <action condition="" type="send_command|delay|script" item="item_name" param="params"/>
+         
+         ... Action definitions ...
+         
+         <action condition="" type="send_command|delay|script" item="item_name" param="params"/>
+      </rule>
+   </item_name>
+   
+</rules>
+
+<script> muze byt definovan kdekoliv uvnitr <rules> a obsahovat javascript syntax kod
+
+Typy rule event:
+---------------
+   changed      
+   on           
+   off
+   click
+   doubleclick
+   tripleclick
+   quadclick
+   longclick
+   longpress
+   start
+   stop
+   
+Podminka se uvadi ve tvaru {item_name.state} {operator} {operand} ... {logicky operator} ...
+   example:
+      <VTemp1>
+         <rule event="changed">
+            <action condition="VTemp1.state > 21" type="send_command" item="VRelay1" param="ON"/>
+            <action condition="VTemp1.state < 21" type="send_command" item="VRelay1" param="OFF"/>
+         </rule>
+      </VTemp1>
+   
+Typy akci:
+----------
+   send_command = Odeslani prikazu definovane item a jako param typ prikazu k odeslani
+      example:
+         <VContactKotelna>
+            <rule event="changed">
+               <action type="send_command" item="LightKotelna" param="TOGGLE"/>
+            </rule>
+         </VContactKotelna>
+      
+   delay        = Pozastaveni zpracovani pravidla na definovanou dobu v param uvedenou v ms
+      example:
+         <VContactKotelna>
+            <rule event="changed">
+               <action type="delay" param="1000"/>
+               <action type="send_command" item="LightKotelna" param="TOGGLE"/>
+            </rule>
+         </VContactKotelna>
+      
+   script       = Vykonani javascript kodu, ktery je uveden v tele <action>
+      example:
+         <VContactKotelna>
+            <rule event="changed">
+               <action type="script">
+                  LightKotelna.send_command(TOGGLE);
+                  TRACE("Zmena stavu kotelny");
+               </action>
+            </rule>
+         </VContactKotelna>
+
+
+Example1:
+  Pravidlo pro item system
+  
+   <system>
+      <rule event="start" name="When system is started">
+        <action type="script"> 
+          TRACE("*** SYSTEM STARTED ***");
+        </action>
+      </rule>
+
+      <rule event="stop" name="When system is stopped">
+        <action type="script"> 
+          TRACE("*** SYSTEM STOPPED ***");
+        </action>
+      </rule>
+    </system>  
+    
+    
+Example2:    
+  Pravidlo pro vykonani akci dane sceny
+ 
+  <SCN_Prichod>  
+  		<rule event="ON">
+        	<action type="send_command" item="DIMM_ObyvakHlavni" param="255"/>
+			<action type="send_command" item="DIMM_KuchynHlavni" param="255"/>
+			<action type="send_command" item="DIMM_PredsinHlavni" param="160"/>
+			<action type="send_command" item="DIMM_ZadveriHlavni" param="160"/>
+		</rule>	   
+ 	</SCN_Prichod>
+ 
+  <SCN_ObyvakIntim>  
+  		<rule event="ON">
+        	<action type="send_command" item="DIMM_ObyvakHlavni" param="2"/>
+			<action type="send_command" item="DIMM_KuchynHlavni" param="2"/>
+        	<action type="send_command" item="DIMM_ObyvakNabytek" param="16"/>
+        	<action type="send_command" item="DIMM_ObyvakStropPanel" param="8"/>
+			<action type="send_command" item="DIMM_KuchynStropPanel" param="8"/>
+		</rule>	   
+ 	</SCN_ObyvakIntim>      
+ 	
+
+
+Javascript API
+==============
+
+systime()  		- Vraci systemovy cas v ms od startu
+abort()    		- Preruseni aplikace controleru
+TRACE("retezec") 	- Debug trace vypis do logu
+TRACE_ERROR("retezec")  - Chybovy debug trace do logu
+
+
+Metody a properties objketu item
+---------------------------------
+item.state         		- Vraci aktualni hodnotu stavu
+item.prevstate     		- Vraci predchazejici hodnotu stavu
+item.send_command(CMD||number) 	- Poslani prikazu nebo hodnoty do item pres binding interface
+item.update(CMD||number)	- Update hodnoty item bez odeslani do binding interface
+
+
+Casovac
+--------
+
+Konstanty:
+
+TIMER_ONCE     = 0       // one-shot timer
+TIMER_PERIODIC = 1       // repeating timer
+
+// Create timer
+timer1 = timer_create(1, timer1_cb);
+
+// Destroy timer
+timer1.destroy();
+
+// Start timer with defined period in ms
+timer1.start(4000);
+
+// Stop timer
+timer1.stop();
+
+

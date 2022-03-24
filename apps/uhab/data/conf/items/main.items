@@ -1,0 +1,140 @@
+<items> 
+
+   <group name="Contacts" label="Vypinace"/>
+   <group name="LED" label="LED"/>
+   <group name="Temperature" label="Teplomery"/>
+   <group name="Relays" label="Relays"/>
+
+<!-- VEHABUS 
+   <contact name="VContact1" label="VContact1" group="Contacts" binding="vehabus=input:0"/>
+   <contact name="VContact2" label="VContact2" group="Contacts" binding="vehabus=input:1"/>
+   <contact name="VContact3" label="VContact3" group="Contacts" binding="vehabus=input:2"/>
+   <contact name="VContact4" label="VContact4" group="Contacts" binding="vehabus=input:3"/>
+   <contact name="VContact5" label="VContact5" group="Contacts" binding="vehabus=input:4"/>
+   <contact name="VContact6" label="VContact6" group="Contacts" binding="vehabus=input:5"/>
+   <contact name="VContact7" label="VContact7" group="Contacts" binding="vehabus=input:6"/>
+   <contact name="VContact8" label="VContact8" group="Contacts" binding="vehabus=input:7"/>
+   <contact name="VContact9" label="VContact9" group="Contacts" binding="vehabus=input:8"/>
+   <contact name="VContact10" label="VContact10" group="Contacts" binding="vehabus=input:9"/>
+   <contact name="VContact11" label="VContact11" group="Contacts" binding="vehabus=input:10"/>
+   <contact name="VContact12" label="VContact12" group="Contacts" binding="vehabus=input:11"/>
+   <contact name="VContact13" label="VContact13" group="Contacts" binding="vehabus=input:12"/>
+   <contact name="VContact14" label="VContact14" group="Contacts" binding="vehabus=input:13"/>
+   <contact name="VContact15" label="VContact15" group="Contacts" binding="vehabus=input:14"/>
+   <contact name="VContact16" label="VContact16" group="Contacts" binding="vehabus=input:15"/>
+   <contact name="VContact17" label="VContact17" group="Contacts" binding="vehabus=input:16"/>
+   <contact name="VContact18" label="VContact18" group="Contacts" binding="vehabus=input:17"/>
+   <contact name="VContact19" label="VContact19" group="Contacts" binding="vehabus=input:18"/>
+   <contact name="VContact20" label="VContact20" group="Contacts" binding="vehabus=input:19"/>
+   <contact name="VContact21" label="VContact21" group="Contacts" binding="vehabus=input:20"/>
+   <contact name="VContact22" label="VContact22" group="Contacts" binding="vehabus=input:21"/>
+   <contact name="VContact23" label="VContact23" group="Contacts" binding="vehabus=input:22"/>
+   <contact name="VContact24" label="VContact24" group="Contacts" binding="vehabus=input:23"/>
+   <contact name="VContact25" label="VContact25" group="Contacts" binding="vehabus=input:24"/>
+   <contact name="VContact26" label="VContact26" group="Contacts" binding="vehabus=input:25"/>
+   <contact name="VContact27" label="VContact27" group="Contacts" binding="vehabus=input:26"/>
+   <contact name="VContact28" label="VContact28" group="Contacts" binding="vehabus=input:27"/>
+   <contact name="VContact29" label="VContact29" group="Contacts" binding="vehabus=input:28"/>
+   <contact name="VContact30" label="VContact30" group="Contacts" binding="vehabus=input:29"/>
+   <contact name="VContact31" label="VContact31" group="Contacts" binding="vehabus=input:30"/>
+   <contact name="VContact32" label="VContact32" group="Contacts" binding="vehabus=input:31"/>
+
+   <switch name="VLed1" label="VLed1" group="LED" binding="vehabus=output:0"/>
+   <switch name="VLed2" label="VLed2" group="LED" binding="vehabus=output:1"/>
+   <switch name="VLed3" label="VLed3" group="LED" binding="vehabus=output:2"/>
+   <switch name="VLed4" label="VLed4" group="LED" binding="vehabus=output:3"/>
+   <switch name="VLed5" label="VLed5" group="LED" binding="vehabus=output:4"/>
+   <switch name="VLed6" label="VLed6" group="LED" binding="vehabus=output:5"/>
+   <switch name="VLed7" label="VLed7" group="LED" binding="vehabus=output:6"/>
+   <switch name="VLed8" label="VLed8" group="LED" binding="vehabus=output:7"/>
+   <switch name="VLed9" label="VLed9" group="LED" binding="vehabus=output:8"/>
+   <switch name="VLed10" label="VLed10" group="LED" binding="vehabus=output:9"/>
+   <switch name="VLed11" label="VLed11" group="LED" binding="vehabus=output:10"/>
+   <switch name="VLed12" label="VLed12" group="LED" binding="vehabus=output:11"/>
+   <switch name="VLed13" label="VLed13" group="LED" binding="vehabus=output:12"/>
+   <switch name="VLed14" label="VLed14" group="LED" binding="vehabus=output:13"/>
+   <switch name="VLed15" label="VLed15" group="LED" binding="vehabus=output:14"/>
+   <switch name="VLed16" label="VLed16" group="LED" binding="vehabus=output:15"/>
+   <switch name="VLed17" label="VLed17" group="LED" binding="vehabus=output:16"/>
+   <switch name="VLed18" label="VLed18" group="LED" binding="vehabus=output:17"/>
+   <switch name="VLed19" label="VLed19" group="LED" binding="vehabus=output:18"/>
+   <switch name="VLed20" label="VLed20" group="LED" binding="vehabus=output:19"/>
+   <switch name="VLed21" label="VLed21" group="LED" binding="vehabus=output:20"/>
+   <switch name="VLed22" label="VLed22" group="LED" binding="vehabus=output:21"/>
+   <switch name="VLed23" label="VLed23" group="LED" binding="vehabus=output:22"/>
+   <switch name="VLed24" label="VLed24" group="LED" binding="vehabus=output:23"/>
+   <switch name="VLed25" label="VLed25" group="LED" binding="vehabus=output:24"/>
+   <switch name="VLed26" label="VLed26" group="LED" binding="vehabus=output:25"/>
+   <switch name="VLed27" label="VLed27" group="LED" binding="vehabus=output:26"/>
+   <switch name="VLed28" label="VLed28" group="LED" binding="vehabus=output:27"/>
+   <switch name="VLed29" label="VLed29" group="LED" binding="vehabus=output:28"/>
+   <switch name="VLed30" label="VLed30" group="LED" binding="vehabus=output:29"/>
+   <switch name="VLed31" label="VLed31" group="LED" binding="vehabus=output:30"/>
+   <switch name="VLed32" label="VLed32" group="LED" binding="vehabus=output:31"/>
+   <switch name="VLed33" label="VLed33" group="LED" binding="vehabus=output:32"/>
+   <switch name="VLed34" label="VLed34" group="LED" binding="vehabus=output:33"/>
+   <switch name="VLed35" label="VLed35" group="LED" binding="vehabus=output:34"/>
+   <switch name="VLed36" label="VLed36" group="LED" binding="vehabus=output:35"/>
+   <switch name="VLed37" label="VLed37" group="LED" binding="vehabus=output:36"/>
+   <switch name="VLed38" label="VLed38" group="LED" binding="vehabus=output:37"/>
+   <switch name="VLed39" label="VLed39" group="LED" binding="vehabus=output:38"/>
+   <switch name="VLed40" label="VLed40" group="LED" binding="vehabus=output:39"/>
+   <switch name="VLed41" label="VLed41" group="LED" binding="vehabus=output:40"/>
+   <switch name="VLed42" label="VLed42" group="LED" binding="vehabus=output:41"/>
+   <switch name="VLed43" label="VLed43" group="LED" binding="vehabus=output:42"/>
+   <switch name="VLed44" label="VLed44" group="LED" binding="vehabus=output:43"/>
+   <switch name="VLed45" label="VLed45" group="LED" binding="vehabus=output:44"/>
+   <switch name="VLed46" label="VLed46" group="LED" binding="vehabus=output:45"/>
+   <switch name="VLed47" label="VLed47" group="LED" binding="vehabus=output:46"/>
+   <switch name="VLed48" label="VLed48" group="LED" binding="vehabus=output:47"/>
+   <switch name="VLed49" label="VLed49" group="LED" binding="vehabus=output:48"/>
+   <switch name="VLed50" label="VLed50" group="LED" binding="vehabus=output:49"/>
+   <switch name="VLed51" label="VLed51" group="LED" binding="vehabus=output:50"/>
+   <switch name="VLed52" label="VLed52" group="LED" binding="vehabus=output:51"/>
+   <switch name="VLed53" label="VLed53" group="LED" binding="vehabus=output:52"/>
+   <switch name="VLed54" label="VLed54" group="LED" binding="vehabus=output:53"/>
+   <switch name="VLed55" label="VLed55" group="LED" binding="vehabus=output:54"/>
+   <switch name="VLed56" label="VLed56" group="LED" binding="vehabus=output:55"/>
+   <switch name="VLed57" label="VLed57" group="LED" binding="vehabus=output:56"/>
+   <switch name="VLed58" label="VLed58" group="LED" binding="vehabus=output:57"/>
+   <switch name="VLed59" label="VLed59" group="LED" binding="vehabus=output:58"/>
+   <switch name="VLed60" label="VLed60" group="LED" binding="vehabus=output:59"/>
+   <switch name="VLed61" label="VLed61" group="LED" binding="vehabus=output:60"/>
+   <switch name="VLed62" label="VLed62" group="LED" binding="vehabus=output:61"/>
+   <switch name="VLed63" label="VLed63" group="LED" binding="vehabus=output:62"/>
+   <switch name="VLed64" label="VLed64" group="LED" binding="vehabus=output:63"/>
+
+   <number name="VTemp1" label="Temp1 [%.1f °C]" group="Temperature" binding="vehabus=onewire:0"/>
+   <number name="VTemp2" label="Temp2 [%.1f °C]" group="Temperature" binding="vehabus=onewire:1"/>
+   <number name="VTemp3" label="Temp3 [%.1f °C]" group="Temperature" binding="vehabus=onewire:2"/>
+   <number name="VTemp4" label="Temp4 [%.1f °C]" group="Temperature" binding="vehabus=onewire:3"/>
+   <number name="VTemp5" label="Temp5 [%.1f °C]" group="Temperature" binding="vehabus=onewire:4"/>
+   <number name="VTemp6" label="Temp6 [%.1f °C]" group="Temperature" binding="vehabus=onewire:5"/>
+   <number name="VTemp7" label="Temp7 [%.1f °C]" group="Temperature" binding="vehabus=onewire:6"/>
+   <number name="VTemp8" label="Temp8 [%.1f °C]" group="Temperature" binding="vehabus=onewire:7"/>
+  
+   <switch name="VRelay1" label="VRelay1" group="Relays" binding="vehabus=relay:0"/>
+   <switch name="VRelay2" label="VRelay2" group="Relays" binding="vehabus=relay:1"/>
+   <switch name="VRelay3" label="VRelay3" group="Relays" binding="vehabus=relay:2"/>
+   <switch name="VRelay4" label="VRelay4" group="Relays" binding="vehabus=relay:3"/>
+   <switch name="VRelay5" label="VRelay5" group="Relays" binding="vehabus=relay:4"/>
+   <switch name="VRelay6" label="VRelay6" group="Relays" binding="vehabus=relay:5"/>
+   <switch name="VRelay7" label="VRelay7" group="Relays" binding="vehabus=relay:6"/>
+   <switch name="VRelay8" label="VRelay8" group="Relays" binding="vehabus=relay:7"/>
+
+   <dimmer name="Dim1_1" label="Dim1_1" binding="dmx=dmx1:1 ON=255 OFF=0"/>
+   <dimmer name="Dim1_2" label="Dim1_2" binding="dmx=dmx1:2 ON=255 OFF=0"/>
+   <dimmer name="Dim1_3" label="Dim1_3" binding="dmx=dmx1:3 ON=255 OFF=0"/>    
+  
+   <dimmer name="Dim2_1" label="Dim2_1" binding="dmx=dmx2:1 ON=255 OFF=0"/>
+   <dimmer name="Dim2_2" label="Dim2_2" binding="dmx=dmx2:2 ON=255 OFF=0"/>
+   <dimmer name="Dim2_3" label="Dim2_3" binding="dmx=dmx2:3 ON=255 OFF=0"/>    
+
+   <dimmer name="Dim3_1" label="Dim3_1" binding="dmx=dmx2:1 ON=255 OFF=0"/>
+   <dimmer name="Dim3_2" label="Dim3_2" binding="dmx=dmx2:2 ON=255 OFF=0"/>
+   <dimmer name="Dim3_3" label="Dim3_3" binding="dmx=dmx2:3 ON=255 OFF=0"/>     
+
+-->
+
+</items>
+
