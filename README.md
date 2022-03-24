@@ -1,2 +1,2 @@
-# uhab
-UHAB - Home automation
+# uHAB
+uHAB - Home automation
